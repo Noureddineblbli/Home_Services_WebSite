@@ -19,6 +19,6 @@ class DatabaseSeeder extends Seeder
         //     ServiceCategorySeeder::class
         // ]);
 
-        \App\Models\Service::factory(20)->create();
+         \App\Models\Service::factory(20)->create();
     }
 }

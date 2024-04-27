@@ -43,7 +43,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeComponent::class)->name('home');
 
-Route::get('/homeAuth', HomeComponent::class)->name('homeAuth')->middleware(['auth','verified']);
+Route::get('/homeAuth', HomeComponent::class)->name('homeAuth')->middleware(['auth','verified','authsprovider']);
+
+Route::get('/waiting-page', function () {
+    return view('waiting_page');
+})->name('waiting_page');
 
 Route::get('/service-category', ServiceCategoriesComponent::class)->name('home.service_categories');
 
@@ -104,7 +108,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
  
-    return redirect('/');
+    return redirect('/homeAuth');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
 use Illuminate\Http\Request;

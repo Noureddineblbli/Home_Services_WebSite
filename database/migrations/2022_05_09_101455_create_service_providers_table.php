@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->bigInteger('service_category_id')->unsigned()->nullable();
             $table->string('service_location')->nullable();
+            $table->boolean('verified_by_admin')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

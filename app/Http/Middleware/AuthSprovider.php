@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\ServiceProvider;
 
 class AuthSprovider
 {
@@ -17,8 +18,16 @@ class AuthSprovider
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->utype === 'SVP') {
-            return $next($request);
+        $user = Auth::user();
+
+        if ($user && $user->utype === 'SVP' && $user->email_verified_at) {
+            $serviceProvider = ServiceProvider::where('user_id', $user->id)->first();
+
+            if ($serviceProvider && $serviceProvider->verified_by_admin) {
+                return $next($request);
+            } else {
+                return redirect()->route('waiting_page');
+            }
         } else {
             session()->flush();
             return redirect()->route('login');

@@ -34,4 +34,4 @@ class ServiceFactory extends Factory
             'exclusion' => $this->faker->text(20) . '|' . $this->faker->text(20) . '|'  . $this->faker->text(20) . '|'  . $this->faker->text(20) . '|'  . $this->faker->text(20),
         ];
     }
-}
+} 

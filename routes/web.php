@@ -14,6 +14,7 @@ use App\Http\Livewire\Admin\Service\AdminServiceProvidersComponent;
 use App\Http\Livewire\Admin\Service\AdminServicesByCategoryComponent;
 use App\Http\Livewire\Admin\Service\AdminServicesComponent;
 use App\Http\Livewire\Admin\Service\AdminSliderComponent;
+use App\Http\Livewire\Admin\Service\AdminVerifyServiceProvidersComponent;
 use App\Http\Livewire\ContactComponent;
 use App\Http\Livewire\Customer\CustomerDashboardComponent;
 use App\Http\Livewire\HomeComponent;
@@ -43,7 +44,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeComponent::class)->name('home');
 
-Route::get('/homeAuth', HomeComponent::class)->name('homeAuth')->middleware(['auth','verified','authsprovider']);
+Route::get('/homeAuth', HomeComponent::class)->name('homeAuth')->middleware(['verified','auth','authsprovider']);
 
 Route::get('/waiting-page', function () {
     return view('waiting_page');
@@ -64,7 +65,7 @@ Route::get('/change-location', ChangeLocationComponent::class)->name('home.chang
 Route::get('/contact-us', ContactComponent::class)->name('home.contact');
 
 // For Admin
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified', 'authadmin'])->group(function () {
+Route::middleware(['verified','auth:sanctum', config('jetstream.auth_session'), 'authadmin'])->group(function () {
 
     Route::get('/admin/dashboard', AdminDashboardComponent::class)->name('admin.dashboard');
 
@@ -85,17 +86,18 @@ Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified',
     Route::get('/admin/contacts', AdminContactComponent::class)->name('admin.contacts');
 
     Route::get('/admin/service-providers', AdminServiceProvidersComponent::class)->name('admin.service_providers');
+    Route::get('/admin/service-providers/pending', AdminVerifyServiceProvidersComponent::class)->name('admin.service_providers.pending');
 });
 
 // For Service Provider
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified', 'authsprovider'])->group(function () {
+Route::middleware(['verified', 'auth:sanctum', config('jetstream.auth_session'), 'authsprovider'])->group(function () {
     Route::get('/sprovider/dashboard', SproviderDashboardComponent::class)->name('sprovider.dashboard');
     Route::get('/sprovider/profile', SproviderProfileComponent::class)->name('sprovider.profile');
     Route::get('/sprovider/profile/edit', EditSproviderProfileComponent::class)->name('sprovider.edit_profile');
 });
 
 // For Customer
-Route::middleware(['auth:sanctum', config('jetstream.auth_session'), 'verified'])->group(function () {
+Route::middleware(['verified' ,'auth:sanctum', config('jetstream.auth_session')])->group(function () {
     Route::get('/customer/dashboard', CustomerDashboardComponent::class)->name('customer.dashboard');
 });
 

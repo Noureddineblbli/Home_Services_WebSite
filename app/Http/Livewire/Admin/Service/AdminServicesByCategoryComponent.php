@@ -20,7 +20,7 @@ class AdminServicesByCategoryComponent extends Component
     public function render()
     {
         $category = ServiceCategory::where('slug', $this->category_slug)->first();
-        $services = Service::where('service_category_id', $category->id)->paginate(10);
+        $services = Service::where('service_category_id', $category->id)->where('verified_by_admin',0)->paginate(10);
         return view('livewire.admin.service.admin-services-by-category-component', ['category_name' => $category->name, 'services' => $services])->layout('layouts.base');
     }
 }

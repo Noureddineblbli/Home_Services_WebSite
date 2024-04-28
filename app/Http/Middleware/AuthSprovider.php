@@ -20,14 +20,13 @@ class AuthSprovider
     {
         $user = Auth::user();
 
-        if ($user && $user->utype === 'SVP' && $user->email_verified_at) {
+        if ($user && $user->email_verified_at) {
             $serviceProvider = ServiceProvider::where('user_id', $user->id)->first();
 
-            if ($serviceProvider && $serviceProvider->verified_by_admin) {
-                return $next($request);
-            } else {
+            if ($user->utype === 'SVP' && !$serviceProvider->verified_by_admin) {
                 return redirect()->route('waiting_page');
             }
+                return $next($request);   
         } else {
             session()->flush();
             return redirect()->route('login');

@@ -113,7 +113,7 @@
                                         </table>
                                     </div>
                                     <div class="panel-footer">
-                                        <form>
+                                        <form action="{{route('reservationForm')}}"> 
                                             <input type="submit" class="btn btn-primary" name="submit"
                                                 value=" Book Now">
                                         </form>

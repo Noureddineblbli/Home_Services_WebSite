@@ -1,31 +1,35 @@
 <?php
 
+use Illuminate\Http\Request;
+use App\Http\Livewire\HomeComponent;
+use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\ContactComponent;
 use App\Http\Controllers\SearchController;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
-use App\Http\Livewire\Admin\Service\AdminAddServiceCategoryComponent;
-use App\Http\Livewire\Admin\Service\AdminAddServiceComponent;
-use App\Http\Livewire\Admin\Service\AdminAddSlideComponent;
+use App\Http\Livewire\Service\ChangeLocationComponent;
+use App\Http\Livewire\Service\ServiceDetailsComponent;
+use App\Http\Livewire\Customer\ReservationFormComponent;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use App\Http\Livewire\Admin\Service\AdminSliderComponent;
+use App\Http\Livewire\Service\ServiceCategoriesComponent;
 use App\Http\Livewire\Admin\Service\AdminContactComponent;
-use App\Http\Livewire\Admin\Service\AdminEditServiceCategoryComponent;
-use App\Http\Livewire\Admin\Service\AdminEditServiceComponent;
+use App\Http\Livewire\Customer\CustomerDashboardComponent;
+use App\Http\Livewire\Service\ServicesByCategoryComponent;
+use App\Http\Livewire\Sprovider\SproviderProfileComponent;
+use App\Http\Livewire\Admin\Service\AdminAddSlideComponent;
+use App\Http\Livewire\Admin\Service\AdminServicesComponent;
 use App\Http\Livewire\Admin\Service\AdminEditSlideComponent;
+use App\Http\Livewire\Sprovider\SproviderDashboardComponent;
+use App\Http\Livewire\Admin\Service\AdminAddServiceComponent;
+use App\Http\Livewire\Admin\Service\AdminEditServiceComponent;
+use App\Http\Livewire\Sprovider\EditSproviderProfileComponent;
 use App\Http\Livewire\Admin\Service\AdminServiceCategoryComponent;
 use App\Http\Livewire\Admin\Service\AdminServiceProvidersComponent;
-use App\Http\Livewire\Admin\Service\AdminServicesByCategoryComponent;
-use App\Http\Livewire\Admin\Service\AdminServicesComponent;
-use App\Http\Livewire\Admin\Service\AdminSliderComponent;
+use App\Http\Livewire\Admin\Service\AdminAddServiceCategoryComponent;
+use App\Http\Livewire\Admin\Service\AdminEditServiceCategoryComponent;
 use App\Http\Livewire\Admin\Service\AdminVerifyServiceProvidersComponent;
-use App\Http\Livewire\ContactComponent;
-use App\Http\Livewire\Customer\CustomerDashboardComponent;
-use App\Http\Livewire\HomeComponent;
-use App\Http\Livewire\Service\ChangeLocationComponent;
-use App\Http\Livewire\Service\ServiceCategoriesComponent;
-use App\Http\Livewire\Service\ServiceDetailsComponent;
-use App\Http\Livewire\Service\ServicesByCategoryComponent;
-use App\Http\Livewire\Sprovider\EditSproviderProfileComponent;
-use App\Http\Livewire\Sprovider\SproviderDashboardComponent;
-use App\Http\Livewire\Sprovider\SproviderProfileComponent;
-use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\Admin\Service\AdminServicesByCategoryComponent;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -105,18 +109,19 @@ Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->middleware('auth')->name('verification.notice');
 
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
- 
+
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
  
     return redirect('/homeAuth');
 })->middleware(['auth', 'signed'])->name('verification.verify');
 
-use Illuminate\Http\Request;
+
  
 Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
  
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::get('/reservationForm',ReservationFormComponent::class)->name('reservationForm');

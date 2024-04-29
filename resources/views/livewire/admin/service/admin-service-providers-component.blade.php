@@ -65,7 +65,7 @@
                                                     <td>{{ $sprovider->user->email }}</td>
                                                     <td>{{ $sprovider->user->phone }}</td>
                                                     <td>{{ $sprovider->city }}</td>
-                                                    <td>{{ $sprovider->category->name }}</td>
+                                                    {{-- <td>{{ $sprovider->category->name }}</td> --}}
                                                     <td>{{ $sprovider->service_location }}</td>
                                                 </tr>
                                             @endforeach

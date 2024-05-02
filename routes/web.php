@@ -68,6 +68,8 @@ Route::get('/change-location', ChangeLocationComponent::class)->name('home.chang
 
 Route::get('/contact-us', ContactComponent::class)->name('home.contact');
 
+Route::get('/reservationForm/{service_id}',ReservationFormComponent::class)->name('reservationForm');
+
 // For Admin
 Route::middleware(['verified','auth:sanctum', config('jetstream.auth_session'), 'authadmin'])->group(function () {
 
@@ -124,4 +126,3 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
-Route::get('/reservationForm',ReservationFormComponent::class)->name('reservationForm');

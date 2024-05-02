@@ -24,30 +24,99 @@
                     <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 profile1" style="padding-bottom:40px;">
                         <div class="thinborder-ontop">
                             <h3>Reservation Info</h3>
-                            <x-jet-validation-errors class="mb-4" />
-                            <form id="userregisterationform" method="POST" action="{{ route('register') }}">
+        
+                            @if (Session::has('message'))
+                                        <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
+                                    @endif
+                            <form  wire:submit.prevent="createReservation({{ auth()->user() ? auth()->user()->id : 'null' }})">
                                 @csrf
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
                                     <div class="col-md-6">
-                                        <input id="name" type="text" class="form-control" name="name" value="@auth{{(Auth::user()->name)}}@endif" required="" autofocus="">
+                                        <input id="name" type="text" class="form-control" name="name" value="@auth{{(Auth::user()->name)}}@endif" wire:model="client_name">
+                                        @error('client_name')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
                                     <div class="col-md-6">
-                                        <input id="email" type="email" class="form-control" name="email" value="@auth{{(Auth::user()->email)}}@endif" required="">
+                                        <input id="email" type="email" class="form-control" name="email" value="@auth{{(Auth::user()->email)}}@endif" wire:model="client_email">
+                                        @error('client_email')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     </div>
                                 </div>
-
-                               
-                               
 
                                 <div class="form-group row">
                                     <label for="phone" class="col-md-4 col-form-label text-md-right">Phone</label>
                                     <div class="col-md-6">
-                                        <input id="phone" type="text" class="form-control" name="phone" value="@auth{{(Auth::user()->phone)}}@endif" required="">
+                                        <input id="phone" type="text" class="form-control" name="phone" value="@auth{{(Auth::user()->phone)}}@endif" wire:model="client_phone">
+                                        @error('client_phone')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="city" class="col-md-4 col-form-label text-md-right">City</label>
+                                    <div class="col-md-6">
+                                        <select id="city" class="form-control" name="city" wire:model="client_city">
+                                            <option value="">Select City</option>
+                                            @foreach ($cities as $city)
+                                                <option value="{{ $city }}">
+                                                    {{ $city }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('client_city')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="Adresse" class="col-md-4 col-form-label text-md-right">Adresse</label>
+                                    <div class="col-md-6">
+                                        <input id="adresse" type="text" class="form-control" name="adresse" value="@auth{{(Auth::user()->adresse)}}@endif" wire:model="client_adresse">
+                                        @error('client_adresse')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="Day" class="col-md-4 col-form-label text-md-right">Day</label>
+                                    <div class="col-md-6">
+                                        <input id="day" type="date" class="form-control" name="day" value="" wire:model="day">
+                                        @error('day')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="time" class="col-md-4 col-form-label text-md-right">Time</label>
+                                    <div class="col-md-6">
+                                        <select id="time" class="form-control" name="time" wire:model="time">
+                                            <option value="">Select Time</option>
+                                            @foreach ($timeSlots as $slot)
+                                                <option value="{{ $slot }}">
+                                                    {{ $slot }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('time')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mb-0">
+                                    <div class="col-md-10">
+                                        <button type="submit" class="btn btn-primary pull-right">Valider</button>
                                     </div>
                                 </div>
                               

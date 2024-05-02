@@ -113,9 +113,9 @@
                                         </table>
                                     </div>
                                     <div class="panel-footer">
-                                        <form action="{{route('reservationForm')}}"> 
+                                        <form action="{{route('reservationForm',['service_id' => $service->id])}}"> 
                                             <input type="submit" class="btn btn-primary" name="submit"
-                                                value=" Book Now">
+                                                value="Book Now">
                                         </form>
                                     </div>
                                 </div>

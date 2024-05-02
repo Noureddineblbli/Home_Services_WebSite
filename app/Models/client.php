@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class client extends Model
 {
     use HasFactory;
 
-    protected $table = "services";
+    protected $table = "clients";
 
-    public function category()
+    public function user()
     {
-        return $this->belongsTo(ServiceCategory::class, 'service_category_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function reservations()

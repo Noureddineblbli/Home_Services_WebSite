@@ -97,7 +97,7 @@ Route::middleware(['verified','auth:sanctum', config('jetstream.auth_session'), 
 
 // For Service Provider
 Route::middleware(['verified', 'auth:sanctum', config('jetstream.auth_session'), 'authsprovider'])->group(function () {
-    Route::get('/sprovider/dashboard', SproviderDashboardComponent::class)->name('sprovider.dashboard');
+    Route::get('/sprovider/dashboard/{id}', SproviderDashboardComponent::class)->name('sprovider.dashboard');
     Route::get('/sprovider/profile', SproviderProfileComponent::class)->name('sprovider.profile');
     Route::get('/sprovider/profile/edit', EditSproviderProfileComponent::class)->name('sprovider.edit_profile');
 });

@@ -2,9 +2,13 @@
 
 namespace App\Http\Livewire\Customer;
 
-use Livewire\Component;
 use App\Models\client;
+use Livewire\Component;
 use App\Models\Reservation;
+use App\Models\ServiceProvider;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ServiceProviderNotification;
+use App\Http\Livewire\Sprovider\SproviderDashboardComponent;
 
 class ReservationFormComponent extends Component
 {
@@ -18,10 +22,17 @@ class ReservationFormComponent extends Component
     public $day;
     public $time;
     public $service_id;
+    public $serviceProviders;
+    public $client;
+    public $reservation;
+    public $message;
+  //  public $validateservice;
+
 
     public function mount($service_id)
     {
         $this->service_id = $service_id;
+      //  $this->validateservice = new SproviderDashboardComponent();
     }
 
     public function updated($fields)
@@ -49,26 +60,28 @@ class ReservationFormComponent extends Component
             'time' => 'required|date_format:H:i',
         ]);
 
-        $client = new client();
-        $client->user_id = $user_id;
-        $client->name = $this->client_name;
-        $client->email = $this->client_email;
-        $client->phone = $this->client_phone;
-        $client->city = $this->client_city;
-        $client->adresse = $this->client_adresse;
+        $this->client = new client();
+        $this->client->user_id = $user_id;
+        $this->client->name = $this->client_name;
+        $this->client->email = $this->client_email;
+        $this->client->phone = $this->client_phone;
+        $this->client->city = $this->client_city;
+        $this->client->adresse = $this->client_adresse;
 
-        $client->save();
+        $this->client->save();
 
-        $reservation = new Reservation();
-        $reservation->service_id = $this->service_id;
-        $reservation->client_id = $client->id;
-        $reservation->serviceprovider_id = null;
-        $reservation->status = 'en attent';
-        $reservation->date = $this->day;
-        $reservation->time = $this->time;
+        $this->reservation = new Reservation();
+        $this->reservation->service_id = $this->service_id;
+        $this->reservation->client_id = $this->client->id;
+        $this->reservation->serviceprovider_id = null;
+        $this->reservation->status = 'en attent';
+        $this->reservation->date = $this->day;
+        $this->reservation->time = $this->time;
 
-        $reservation->save();
+        $this->reservation->save();
         session()->flash('message', 'Reservation created successfully');
+
+        $this->notifyServiceProviders();
     }
 
     public function render()
@@ -126,6 +139,43 @@ class ReservationFormComponent extends Component
              'Tinghir',
              'Tiznit'   
         ];
-        return view('livewire.customer.reservation-form-component',['timeSlots'=>$timeSlots,'cities' => $cities])->layout('layouts.base');
+        return view('livewire.customer.reservation-form-component',['timeSlots'=>$timeSlots,'cities' => $cities,'service','message'=>$this->message])->layout('layouts.base');
+    }
+
+
+
+    public function notifyServiceProviders(){
+
+        
+        $this->serviceProviders = ServiceProvider::where('city', $this->client_city)->with('user')->get();
+
+        foreach ( $this->serviceProviders as $serviceProvider) {
+            $email = $serviceProvider->user->email;
+
+          //  $this->validateservice->validateService($this->client,$this->reservation);
+
+            Mail::to($email)->send(new ServiceProviderNotification($this->reservation, $this->client));
+            
+        }
+        $this->message="emails send successfully";
+
+
+    }
+
+    public  function reservation()
+    {
+        return $this->reservation;
+        
+    }
+    public  function client()
+    {
+        return $this->client;
+        
+    }
+
+    public  function Sproviders()
+    {
+        return $this->serviceProviders;
+        
     }
 }

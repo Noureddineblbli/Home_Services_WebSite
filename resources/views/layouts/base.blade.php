@@ -47,7 +47,7 @@
                             @elseif(Auth::user()->utype==='SVP')
                             <li class="login-form"><a href="#" title="My Account (S Providers)">My Account (S Providers)</a>
                                 <ul class="drop-down one-column hover-fade">
-                                    <li><a href="{{ route('sprovider.dashboard') }}">Dashboard</a></li>
+                                    <li><a href="{{ route('sprovider.dashboard',['id' => Auth::user()->id]) }}">Dashboard</a></li>
                                     <li><a href="{{ route('sprovider.profile') }}">My Profile</a></li>
                                     <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
                                 </ul>

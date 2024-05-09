@@ -15,4 +15,8 @@ class ServiceCategory extends Model
     {
         return $this->hasMany(Service::class);
     }
+    public function provider()
+    {
+        return $this->hasMany(ServiceProvider::class);
+    }
 }

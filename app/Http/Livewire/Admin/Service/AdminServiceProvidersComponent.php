@@ -10,6 +10,6 @@ class AdminServiceProvidersComponent extends Component
     public function render()
     {
         $sproviders = ServiceProvider::paginate(12);
-        return view('livewire.admin.service.admin-service-providers-component', ['sproviders' => $sproviders])->layout('layouts.base');
+        return view('livewire.admin.service.admin-service-providers-component', ['sproviders' => $sproviders])->layout('layouts.dashboardLayout');
     }
 }

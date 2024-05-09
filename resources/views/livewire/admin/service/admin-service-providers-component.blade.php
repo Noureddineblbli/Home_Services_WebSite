@@ -1,34 +1,42 @@
 <div>
     <style>
-        nav svg{
+        nav svg {
             height: 20px;
         }
-        nav .hidden{
+
+        nav .hidden {
             display: block !important;
         }
+
+        .table-bordered tbody tr {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .table-bordered tbody tr:hover {
+            background-color: #f0f0f0; /* Change background color on hover */
+        }
+
+        .table-bordered tbody tr .view-details {
+            display: none; /* Hide "view details" message by default */
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .table-bordered tbody tr:hover .view-details {
+            display: block; /* Display "view details" message on row hover */
+        }
     </style>
-    <div class="section-title-01 honmob">
-        <div class="bg_parallax image_02_parallax"></div>
-        <div class="opacy_bg_02">
-            <div class="container">
+
                 <h1>Service Providers</h1>
-                <div class="crumbs">
-                    <ul>
-                        <li><a href="/">Home</a></li>
-                        <li>/</li>
-                        <li>Service Providers</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <section class="content-central">
-        <div class="content_info">
-            <div class="paddings-mini">
-                <div class="container">
-                    <div class="row portfolioContainer">
-                        <div class="col-md-12 profile1">
-                            <div class="panel panel-default">
+
+                            <div class="panel panel-default" style="font-weight: 600;">
                                 <div class="panel-heading">
                                     <div class="row">
                                         <div class="col-md-6">
@@ -43,11 +51,9 @@
                                     @if (Session::has('message'))
                                         <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
                                     @endif
-                                    <table class="table table-striped">
+                                    <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>#</th>
-                                                <th>Image</th>
                                                 <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Phone</th>
@@ -58,26 +64,22 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($sproviders as $sprovider)
-                                                <tr>
-                                                    <td>{{ $sprovider->id }}</td>
-                                                    <td><img src="{{ asset('images/sproviders') }}/{{ $sprovider->image }}" alt="{{ $sprovider->name }}" width="60" /></td>
-                                                    <td>{{ $sprovider->user->name }}</td>
-                                                    <td>{{ $sprovider->user->email }}</td>
-                                                    <td>{{ $sprovider->user->phone }}</td>
-                                                    <td>{{ $sprovider->city }}</td>
-                                                    {{-- <td>{{ $sprovider->category->name }}</td> --}}
-                                                    <td>{{ $sprovider->service_location }}</td>
-                                                </tr>
+                                            
+                                            <tr onclick="window.location.href='{{ route('admin.service_provider.details', ['sprovider_id' => $sprovider->id]) }}'">
+                                                <td>{{ $sprovider->user->name }}</td>
+                                                <td>{{ $sprovider->user->email }}</td>
+                                                <td>{{ $sprovider->user->phone }}</td>
+                                                <td>{{ $sprovider->city }}</td>
+                                                <td>{{ $sprovider->category->name }}</td>
+                                                <td>{{ $sprovider->service_location }}</td>
+                                                <td class="view-details">View Details</td>
+                                            </tr>
+                                             
                                             @endforeach
                                         </tbody>
                                     </table>
                                     {{ $sproviders->links() }}
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                        
 </div>

@@ -27,8 +27,10 @@ use App\Http\Livewire\Admin\Service\AdminServiceCategoryComponent;
 use App\Http\Livewire\Admin\Service\AdminServiceProvidersComponent;
 use App\Http\Livewire\Admin\Service\AdminAddServiceCategoryComponent;
 use App\Http\Livewire\Admin\Service\AdminEditServiceCategoryComponent;
+use App\Http\Livewire\Admin\Service\AdminServiceProvidersDetailsComponent;
 use App\Http\Livewire\Admin\Service\AdminVerifyServiceProvidersComponent;
 use App\Http\Livewire\Admin\Service\AdminServicesByCategoryComponent;
+use App\Http\Livewire\Admin\Service\AdminPendingServiceProvidersComponent;
 
 
 /*
@@ -92,7 +94,11 @@ Route::middleware(['verified','auth:sanctum', config('jetstream.auth_session'), 
     Route::get('/admin/contacts', AdminContactComponent::class)->name('admin.contacts');
 
     Route::get('/admin/service-providers', AdminServiceProvidersComponent::class)->name('admin.service_providers');
-    Route::get('/admin/service-providers/pending', AdminVerifyServiceProvidersComponent::class)->name('admin.service_providers.pending');
+    Route::get('/admin/service-providers/pending', AdminPendingServiceProvidersComponent::class)->name('admin.service_providers.pending');
+    Route::get('/admin/service-providers/{sprovider_id}', AdminServiceProvidersDetailsComponent::class)->name('admin.service_provider.details');
+    Route::get('/admin/Pending-service-providers/{PendingSprovider_id}', AdminVerifyServiceProvidersComponent::class)->name('admin.Pending_service_provider.details');
+
+
 });
 
 // For Service Provider

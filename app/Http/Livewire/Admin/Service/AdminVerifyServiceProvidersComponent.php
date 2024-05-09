@@ -10,10 +10,11 @@ use App\Mail\ServiceProviderVerifiedMail;
 
 class AdminVerifyServiceProvidersComponent extends Component
 {
-    public $PendingSProviders;
-    
-    public function mount()  {
-        $this->PendingSProviders = ServiceProvider::where('verified_by_admin',0)->get();
+    public $PendingSproviderId;
+
+    public function mount($PendingSprovider_id) {
+        $this->PendingSproviderId = $PendingSprovider_id;
+        
     }
 
     public function verifyServiceProvider($id)
@@ -25,8 +26,8 @@ class AdminVerifyServiceProvidersComponent extends Component
         // Send verification email
         Mail::to($provider->user->email)->send(new ServiceProviderVerifiedMail($provider));
 
-        // Refresh the list after verification
-        $this->mount();
+        return redirect()->route('admin.service_providers.pending');
+       
     }
 
     public function rejectServiceProvider($id)
@@ -36,13 +37,13 @@ class AdminVerifyServiceProvidersComponent extends Component
         Mail::to($provider->user->email)->send(new ServiceProviderRejectedMail($provider));
 
         $provider->user->delete();
+        return redirect()->route('admin.service_providers.pending');
 
-        // Refresh the list after rejection
-        $this->mount();
     }
 
     public function render()
     {
-        return view('livewire.admin.service.admin-verify-service-providers-component')->layout('layouts.base');
+        $PendingSprovider = ServiceProvider::where('id',$this->PendingSproviderId)->first();
+        return view('livewire.admin.service.admin-verify-service-providers-component', ['PendingSprovider' => $PendingSprovider])->layout('layouts.dashboardLayout');
     }
 }

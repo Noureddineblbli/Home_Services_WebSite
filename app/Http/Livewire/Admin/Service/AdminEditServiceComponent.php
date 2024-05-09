@@ -142,6 +142,6 @@ class AdminEditServiceComponent extends Component
     public function render()
     {
         $categories = ServiceCategory::all();
-        return view('livewire.admin.service.admin-edit-service-component', ['categories' => $categories])->layout('layouts.base');
+        return view('livewire.admin.service.admin-edit-service-component', ['categories' => $categories])->layout('layouts.dashboardLayout');
     }
 }

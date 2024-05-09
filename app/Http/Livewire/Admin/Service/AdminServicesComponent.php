@@ -10,9 +10,19 @@ class AdminServicesComponent extends Component
 {
     use WithPagination;
 
-    public function deleteService($service_id)
+    public $delete_id;
+
+    protected $listeners = ['ActionConfirmed' => 'deleteService'];
+
+    public function deleteConfirmation($id) {
+        $this->delete_id= $id;
+        $this->dispatchBrowserEvent('show-confirmation');
+        
+    }
+
+    public function deleteService()
     {
-        $service = Service::find($service_id);
+        $service = Service::find($this->delete_id);
 
         if ($service->thumbnail) {
             unlink('images/services/thumbnails' . '/' . $service->thumbnail);
@@ -24,11 +34,13 @@ class AdminServicesComponent extends Component
 
         $service->delete();
         session()->flash('message', 'Service has been deleted successfully!');
+
+
     }
 
     public function render()
     {
         $services = Service::paginate(10);
-        return view('livewire.admin.service.admin-services-component', ['services' => $services])->layout('layouts.base');
+        return view('livewire.admin.service.admin-services-component', ['services' => $services])->layout('layouts.dashboardLayout');
     }
 }

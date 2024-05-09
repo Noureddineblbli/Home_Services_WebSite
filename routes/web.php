@@ -5,6 +5,7 @@ use App\Http\Livewire\HomeComponent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\ContactComponent;
 use App\Http\Controllers\SearchController;
+use App\Http\Livewire\Sprovider\HistoryComponent;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Livewire\Service\ChangeLocationComponent;
 use App\Http\Livewire\Service\ServiceDetailsComponent;
@@ -26,9 +27,9 @@ use App\Http\Livewire\Sprovider\EditSproviderProfileComponent;
 use App\Http\Livewire\Admin\Service\AdminServiceCategoryComponent;
 use App\Http\Livewire\Admin\Service\AdminServiceProvidersComponent;
 use App\Http\Livewire\Admin\Service\AdminAddServiceCategoryComponent;
+use App\Http\Livewire\Admin\Service\AdminServicesByCategoryComponent;
 use App\Http\Livewire\Admin\Service\AdminEditServiceCategoryComponent;
 use App\Http\Livewire\Admin\Service\AdminVerifyServiceProvidersComponent;
-use App\Http\Livewire\Admin\Service\AdminServicesByCategoryComponent;
 
 
 /*
@@ -98,6 +99,7 @@ Route::middleware(['verified','auth:sanctum', config('jetstream.auth_session'), 
 // For Service Provider
 Route::middleware(['verified', 'auth:sanctum', config('jetstream.auth_session'), 'authsprovider'])->group(function () {
     Route::get('/sprovider/dashboard/{id}', SproviderDashboardComponent::class)->name('sprovider.dashboard');
+
     Route::get('/sprovider/profile', SproviderProfileComponent::class)->name('sprovider.profile');
     Route::get('/sprovider/profile/edit', EditSproviderProfileComponent::class)->name('sprovider.edit_profile');
 });

@@ -12,10 +12,10 @@
     <h1>here are his informations : </h1>
     <p>Email: {{ $client->email }}</p>
     <p>Phone: {{ $client->phone }}</p>
-    <p>Address: {{ $client->address }}</p>
+    <p>Address: {{ $client->adresse }}</p>
     
-    <p>Please confirm your availability promptly by clicking this link: <a href="#">Link to Validate Reservation</a>.</p>
-    ="
+    <p>Please confirm your availability promptly by clicking this link: <a href="{{route('login')}}">Link to Validate Reservation</a>.</p>
+    
     <p>This opportunity is time-sensitive. Failure to confirm promptly will result in us offering the appointment to another service provider.</p>
     
     <p>Thank you for your swift response.</p>

@@ -21,6 +21,8 @@ return new class extends Migration
             $table->enum('status', ['en attent', 'confirmé'])->nullable();
             $table->date('date'); 
             $table->time('time');
+            $table->string('adresse_maison');
+            $table->string('ville');
             $table->timestamps();
 
             $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');

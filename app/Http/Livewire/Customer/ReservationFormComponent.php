@@ -2,13 +2,16 @@
 
 namespace App\Http\Livewire\Customer;
 
+use App\Models\User;
 use App\Models\client;
 use Livewire\Component;
 use App\Models\Reservation;
+use App\Models\ServiceCategory;
 use App\Models\ServiceProvider;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ServiceProviderNotification;
 use App\Http\Livewire\Sprovider\SproviderDashboardComponent;
+use App\Models\Service;
 
 class ReservationFormComponent extends Component
 {
@@ -26,6 +29,7 @@ class ReservationFormComponent extends Component
     public $client;
     public $reservation;
     public $message;
+    public $categoryId;
   //  public $validateservice;
 
 
@@ -60,28 +64,80 @@ class ReservationFormComponent extends Component
             'time' => 'required|date_format:H:i',
         ]);
 
-        $this->client = new client();
-        $this->client->user_id = $user_id;
-        $this->client->name = $this->client_name;
-        $this->client->email = $this->client_email;
-        $this->client->phone = $this->client_phone;
-        $this->client->city = $this->client_city;
-        $this->client->adresse = $this->client_adresse;
+        
+        $client = Client::where('phone', $this->client_phone)
+        ->where('email', $this->client_email)
+        ->where('name', $this->client_name)
+        ->first();
 
-        $this->client->save();
+                        if ($client) {
+                            $this->reservation = new Reservation();
+                            $this->reservation->service_id = $this->service_id;
+                            $this->reservation->client_id = $client->id;
+                            $this->reservation->serviceprovider_id = null;
+                            $this->reservation->status = 'en attent';
+                            $this->reservation->date = $this->day;
+                            $this->reservation->time = $this->time;
+                            $this->reservation->ville = $this->client_city;
+                            $this->reservation->adresse_maison = $this->client_adresse;
 
-        $this->reservation = new Reservation();
-        $this->reservation->service_id = $this->service_id;
-        $this->reservation->client_id = $this->client->id;
-        $this->reservation->serviceprovider_id = null;
-        $this->reservation->status = 'en attent';
-        $this->reservation->date = $this->day;
-        $this->reservation->time = $this->time;
+                            $this->reservation->save();
 
-        $this->reservation->save();
+                            $this->notifyServiceProviders();
+
+                        } else {
+                            $this->client = new client();
+                            $this->client->user_id = $user_id;
+                            $this->client->name = $this->client_name;
+                            $this->client->email = $this->client_email;
+                            $this->client->phone = $this->client_phone;
+                            $this->client->save();
+
+                            $this->reservation = new Reservation();
+                            $this->reservation->service_id = $this->service_id;
+                            $this->reservation->client_id = $this->client->id;
+                            $this->reservation->serviceprovider_id = null;
+                            $this->reservation->status = 'en attent';
+                            $this->reservation->date = $this->day;
+                            $this->reservation->time = $this->time;
+                            $this->reservation->ville = $this->client_city;
+                            $this->reservation->adresse_maison = $this->client_adresse;
+                    
+                            $this->reservation->save();
+                            $this->notifyServiceProviders();
+
+
+                        }
+
+
         session()->flash('message', 'Reservation created successfully');
 
-        $this->notifyServiceProviders();
+       
+    }
+
+    public function notifyServiceProviders(){
+
+        $this->categoryId = Service::where('id', $this->service_id)->value('service_category_id');
+        $this->serviceProviders = User::select('users.name', 'users.email')
+       ->join('service_providers as sp', 'users.id', '=', 'sp.user_id')
+       ->where('sp.service_category_id', $this->categoryId)
+       ->where('sp.city', $this->client_city)
+       ->get();
+
+
+        foreach ( $this->serviceProviders as $serviceProvider) {
+            $email = $serviceProvider->email;
+           
+
+          //  $this->validateservice->validateService($this->client,$this->reservation);
+
+            Mail::to($email)->send(new ServiceProviderNotification($this->reservation, $this->client,$serviceProvider));
+            
+        }
+        $this->serviceProviders;
+       
+
+
     }
 
     public function render()
@@ -139,28 +195,12 @@ class ReservationFormComponent extends Component
              'Tinghir',
              'Tiznit'   
         ];
-        return view('livewire.customer.reservation-form-component',['timeSlots'=>$timeSlots,'cities' => $cities,'service','message'=>$this->message])->layout('layouts.base');
+        return view('livewire.customer.reservation-form-component',['timeSlots'=>$timeSlots,'cities' => $cities,'service','serviceProviders'=> $this->serviceProviders])->layout('layouts.base');
     }
 
 
 
-    public function notifyServiceProviders(){
-
-        
-        $this->serviceProviders = ServiceProvider::where('city', $this->client_city)->with('user')->get();
-
-        foreach ( $this->serviceProviders as $serviceProvider) {
-            $email = $serviceProvider->user->email;
-
-          //  $this->validateservice->validateService($this->client,$this->reservation);
-
-            Mail::to($email)->send(new ServiceProviderNotification($this->reservation, $this->client));
-            
-        }
-        $this->message="emails send successfully";
-
-
-    }
+   
 
     public  function reservation()
     {

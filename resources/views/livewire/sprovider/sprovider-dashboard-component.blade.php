@@ -82,21 +82,23 @@
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $reservation->servicName }}</td>
                                                 <td>{{ $reservation->name }}</td>
-                                                <td>{{ $reservation->Adresse }}</td>
+                                                <td>{{ $reservation->adresse_maison }}</td>
                                                 <td>{{ $reservation->email }}</td>
                                                 <td>{{ $reservation->phone }}</td>
                                                 <td>{{ $reservation->date }}</td>
                                                 <td>{{ $reservation->time }}</td>
                                                 @if(!$showHistory)
                                                     <td>
-                                                        <button wire:click="verifyReservation({{ $reservation->id }})">Verify</button>
-                                                        <button onclick="deleteRow({{ $key }})" style="margin-left: 10px"><i class="fa fa-times fa-2x text-danger"></i></button>
+                                                        <button wire:click="verifyReservation({{ $reservation->id}})">Verify</button>
+                                                        <button wire:click="rejeter({{ $reservation->id }}, {{ $sprovider_id }})" style="margin-left: 10px"><i class="fa fa-times fa-2x text-danger"></i></button>
                                                     </td>
                                                 @endif
                                             </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
+
+                                   
                                 </div>
                             </div>
                         </div>
@@ -113,3 +115,5 @@
         $('#row_' + rowId).remove();
     }
 </script>
+
+

@@ -15,12 +15,14 @@ class ServiceProviderNotification extends Mailable
 
     public $reservation;
     public $client;
+    public $serviceProvider;
 
    
-    public function __construct($reservation, $client)
+    public function __construct($reservation, $client,$serviceProvider)
     {
         $this->reservation = $reservation;
         $this->client = $client;
+        $this->serviceProvider = $serviceProvider;
     }
 
     public function build()

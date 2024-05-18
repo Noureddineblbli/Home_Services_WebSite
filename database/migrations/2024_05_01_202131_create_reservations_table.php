@@ -19,6 +19,8 @@ return new class extends Migration
             $table->bigInteger('client_id')->unsigned()->nullable();
             $table->bigInteger('serviceprovider_id')->unsigned()->nullable();
             $table->enum('status', ['en attent', 'confirmé'])->nullable();
+            $table->string('city');
+            $table->string('address');            
             $table->date('date'); 
             $table->time('time');
             $table->timestamps();

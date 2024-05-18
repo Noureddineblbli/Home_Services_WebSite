@@ -81,12 +81,12 @@
  }
  .btn-primary:hover,
  .btn-primary:focus {
-   background-color: #265a88;
-   background-position: 0 -30px;
+   background-color: #ED9455;
+   background-position: 0 -40px;
  }
  .btn-primary:active,
  .btn-primary.active {
-   background-color: #265a88;
+   background-color: #ED9455;
    border-color: #245580;
  }
  .btn-primary.disabled,

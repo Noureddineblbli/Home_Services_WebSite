@@ -17,14 +17,14 @@
         <div class="filter-title">
             <div class="title-header">
                 <h2 style="color:#FFEC9E;">RÉSERVEZ UN SERVICE MAINTENANT</h2>
-                <p class="lead">Book a service at very affordable price, </p>
+                <p class="lead">Réservez une prestation à prix très abordable, </p>
             </div>
             <div class="filter-header">
                 <form id="sform" action="{{ route('searchService') }}" method="post">
                     @csrf
                     <input type="text" id="q" name="q" required="required" placeholder="Quels services souhaitez-vous ?"
                         class="input-large typeahead" autocomplete="off">
-                    <input style= "background-color: #FFEC9E;" type="submit" name="submit" value="Search">
+                    <input type="submit" name="submit" value="Rechercher">
                 </form>
             </div> 
         </div>
@@ -41,7 +41,7 @@
                         <ul id="sponsors" class="tooltip-hover">
 
                             @foreach ($scategories as $scategory)
-                                <li data-toggle="tooltip" title="" data-original-title="{{ $scategory->name }}">
+                                <li data-toggle="tooltip" data-original-title="{{ $scategory->name }}">
                                     <a href="{{ route('home.services_by_category', ['category_slug' => $scategory->slug]) }}">
                                         <img src="{{ asset('images/categories') }}/{{ $scategory->image }}" alt="{{ $scategory->name }}">
                                     </a>
@@ -61,8 +61,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="titles">
-                            <h2>SurfsideMedia <span>Choice</span> of Services</h2>
-                            <i class="fa fa-plane"></i>
+                            <h2>ServieNet <span>Choix</span> des Services</h2>
+                            
                             <hr class="tall">
                         </div>
                     </div>
@@ -73,15 +73,15 @@
                                 <a class="g-list" href="{{ route('home.service_details', ['service_slug' => $service->slug]) }}">
                                     <div class="img-hover">
                                         <img src="{{ asset('images/services/thumbnails') }}/{{ $service->image }}" alt="{{ $service->name }}"
-                                            class="img-responsive">
+                                            class="img-responsive" style="width: 100%;height:200px;">
                                     </div>
-                                    <div class="info-gallery">
+                                    <div class="info-gallery" style="height:200px;">
                                         <h3>{{ $service->name }}</h3>
                                         <hr class="separator">
                                         <p>{{ $service->tagline }}</p>
                                         <div class="content-btn"><a href="{{ route('home.service_details', ['service_slug' => $service->slug]) }}"
-                                                class="btn btn-primary">Book Now</a></div>
-                                        <div class="price"><span>&#36;</span><b>From</b>{{ $service->price }}</div>
+                                                class="btn btn-primary">Réservez</a></div>
+                                        <div class="price"><span>&#36;</span><b>à partir de</b>{{ $service->price }}</div>
                                     </div>
                                 </a>
                             </div>
@@ -97,13 +97,13 @@
                     <div class="row">
                         <div class="col-md-4 ">
                             <div class="services-lines-info">
-                                <h2>WELCOME TO DIVERSIFIED</h2>
+                                <h2>BIENVENUE CHEZ ServiceNet</h2>
                                 <p class="lead">
-                                    Book best services at one place.
+                                    Réservez les meilleurs services en un seul endroit.
                                     <span class="line"></span>
                                 </p>
 
-                                <p>Find a wide variety of home services.</p>
+                                <p>Retrouvez une grande variété de services à domicile.</p>
                             </div>
                         </div>
                         <div class="col-md-8">
@@ -131,8 +131,8 @@
             <div class="container">
                 <div class="row">
                     <div class="titles">
-                        <h2><span>Appliance</span>Services</h2>
-                        <i class="fa fa-plane"></i>
+                        <h2>Services <span>d'électroménager</span></h2>
+                        
                         <hr class="tall">
                     </div>
                 </div>
@@ -142,16 +142,16 @@
                     <div>
                         <a class="g-list" href="{{ route('home.service_details', ['service_slug' => $aservice->slug]) }}">
                             <div class="img-hover">
-                                <img src="{{ asset('images/services/thumbnails') }}/{{ $aservice->thumbnail }}" alt="{{ $aservice->name }}" class="img-responsive">
+                                <img src="{{ asset('images/services/thumbnails') }}/{{ $aservice->thumbnail }}" alt="{{ $aservice->name }}" class="img-responsive" style="width: 100%;height:200px;">
                             </div>
 
-                            <div class="info-gallery">
+                            <div class="info-gallery" style="height:200px;">
                                 <h3>{{ $aservice->name }}</h3>
                                 <hr class="separator">
                                 <p>{{ $aservice->tagline }}</p>
                                 <div class="content-btn"><a href="{{ route('home.service_details', ['service_slug' => $aservice->slug]) }}"
-                                        class="btn btn-primary">Book Now</a></div>
-                                <div class="price"><span>&#36;</span><b>From</b>{{ $aservice->price }}</div>
+                                        class="btn btn-primary">Réservez</a></div>
+                                <div class="price"><span>&#36;</span><b>à partir de</b>{{ $aservice->price }}</div>
                             </div>
                         </a>
                     </div>

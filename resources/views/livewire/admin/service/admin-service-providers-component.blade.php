@@ -69,9 +69,9 @@
                                                 <td>{{ $sprovider->user->name }}</td>
                                                 <td>{{ $sprovider->user->email }}</td>
                                                 <td>{{ $sprovider->user->phone }}</td>
-                                                <td>{{ $sprovider->city }}</td>
+                                                <td>{{ $sprovider->user->city }}</td>
                                                 <td>{{ $sprovider->category->name }}</td>
-                                                <td>{{ $sprovider->service_location }}</td>
+                                                <td>{{ $sprovider->user->address }}</td>
                                                 <td class="view-details">View Details</td>
                                             </tr>
                                              

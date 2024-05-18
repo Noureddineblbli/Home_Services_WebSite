@@ -7,6 +7,8 @@ use Livewire\Component;
 
 class ServiceDetailsComponent extends Component
 {
+    public $service_slug;
+
     public function mount($service_slug)
     {
         $this->service_slug = $service_slug;

@@ -1,37 +1,74 @@
-<x-base-layout>
-    <x-jet-authentication-card>
-        <x-slot name="logo">
-            <x-jet-authentication-card-logo />
-        </x-slot>
-
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
-        </div>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Verify Email</title>
+    <style>
+        body {
+            background-color: #ED9455; /* Red background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .card {
+            background-color: #FFEC9E; /* White background for card */
+            border-radius: 8px;
+            box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .card h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .card p {
+            margin-bottom: 20px;
+        }
+        .card form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .card form button {
+            margin-top: 10px;
+            padding: 8px 16px;
+            border: none;
+            background-color: #252C2E; /* Green button */
+            color: #ffffff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .card form button:hover {
+            background-color: #ED9455; /* Darker green on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Vérifier Email</h1>
+        <p>Merci pour l'enregistrement! Avant de commencer, pourriez-vous vérifier votre adresse e-mail en cliquant sur le lien que nous venons de vous envoyer par e-mail ? Si vous n'avez pas reçu l'e-mail, nous vous en enverrons volontiers un autre.</p>
+    
         @if (session('status') == 'verification-link-sent')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ __('A new verification link has been sent to the email address you provided during registration.') }}
-            </div>
+            <div>{{ __('Un nouveau lien de vérification a été envoyé à e-mail que vous avez fournie lors de votre inscription.') }}</div>
         @endif
-
-        <div class="mt-4 flex items-center justify-between">
-            <form method="POST" action="{{ route('verification.send') }}">
-                @csrf
-
-                <div>
-                    <x-jet-button type="submit">
-                        {{ __('Resend Verification Email') }}
-                    </x-jet-button>
-                </div>
-            </form>
-
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-
-                <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    {{ __('Log Out') }}
-                </button>
-            </form>
-        </div>
-    </x-jet-authentication-card>
-</x-base-layout>
+    
+        <form method="POST" action="{{ route('verification.send') }}">
+            @csrf
+            <button type="submit">{{ __('Renvoyer e-mail de vérification') }}</button>
+        </form>
+    
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">{{ __('Se déconnecter') }}</button>
+        </form>
+    </div>
+</body>
+</html>

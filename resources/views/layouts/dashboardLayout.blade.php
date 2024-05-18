@@ -55,7 +55,7 @@
             <span class="material-icons-outlined">group</span> Service Providers
             </a>
           </li>
-          <li class="sidebar-list-item">
+          {{-- <li class="sidebar-list-item">
             <a href="{{ route('admin.slider') }}" >
             <span class="material-icons-outlined">slideshow</span> Sliders
             </a>
@@ -64,7 +64,7 @@
             <a href="{{ route('admin.contacts') }}" >
             <span class="material-icons-outlined">contacts</span> Contacts
             </a>
-          </li>
+          </li> --}}
           <li class="sidebar-list-item">
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none">

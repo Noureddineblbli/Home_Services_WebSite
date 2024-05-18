@@ -20,7 +20,6 @@ class ServiceProviderVerifiedMail extends Mailable
     public function build()
     {
         return $this->subject('Your Account has been verified')
-                    
                     ->view('emails.service-provider-verified',['provider'=>$this->provider]);
     }
 }

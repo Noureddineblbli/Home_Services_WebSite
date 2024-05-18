@@ -70,9 +70,9 @@
                             <td>{{ $PendingSProvider->user->name }}</td>
                             <td>{{ $PendingSProvider->user->email }}</td>
                             <td>{{ $PendingSProvider->user->phone }}</td>
-                            <td>{{ $PendingSProvider->city }}</td>
+                            <td>{{ $PendingSProvider->user->city }}</td>
                             <td>{{ $PendingSProvider->category->name }}</td>
-                            <td>{{ $PendingSProvider->service_location }}</td>
+                            <td>{{ $PendingSProvider->user->address }}</td>
                             <td class="view-details">View Details</td>
                         </tr>
                     @endforeach

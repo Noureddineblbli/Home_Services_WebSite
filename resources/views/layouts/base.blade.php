@@ -29,7 +29,7 @@
 
                 <ul class="collapse">
                     <li class="title">
-                        <a href="/"><img src="{{ asset('images/logo.png') }}"></a>
+                        <a href="/"><img src="{{ asset('images/logo.png') }}" style="width: 55px;"></a>
                     </li>
                     <li style="float: left;"> 
                         <a href="{{ route('home.service_categories') }}"><strong>Catégories de services</strong></a>
@@ -38,25 +38,25 @@
                     @if (Route::has('login'))
                         @auth
                             @if (Auth::user()->utype==='ADM')
-                                <li class="login-form"><a href="#" title="My Account (Admin)">My Account (Admin)</a>
+                                <li class="login-form"><a href="#" title="Mon compte (Admin)">Mon compte (Admin)</a>
                                     <ul class="drop-down one-column hover-fade">
                                         <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                                        <li><a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                                        <li><a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Se déconnecter</a></li>
                                     </ul>
                                 </li>
                             @elseif(Auth::user()->utype==='SVP')
-                            <li class="login-form"><a href="#" title="My Account (S Providers)">My Account (S Providers)</a>
+                            <li class="login-form"><a href="#" title="Mon compte (Prestataire)">Mon compte (Prestataire)</a>
                                 <ul class="drop-down one-column hover-fade">
                                     <li><a href="{{ route('sprovider.dashboard',['id' => Auth::user()->id]) }}">Dashboard</a></li>
                                     <li><a href="{{ route('sprovider.profile') }}">My Profile</a></li>
-                                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                                    <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Se déconnecter</a></li>
                                 </ul>
                             </li>
                             @else
-                            <li class="login-form"><a href="#" title="My Account (Customer)">My Account (Customer)</a>
+                            <li class="login-form"><a href="#" title="Mon compte (Client)">Mon compte (Client)</a>
                                 <ul class="drop-down one-column hover-fade">
                                     <li><a href="{{ route('customer.dashboard') }}">Dashboard</a></li>
-                                    <li><a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                                    <li><a  href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Se déconnecter</a></li>
                                 </ul>
                             </li>
                             @endif
@@ -64,8 +64,8 @@
                             @csrf
                         </form>
                         @else
-                            <li class="login-form"> <a href="{{ route('register') }}" title="Register">Register</a></li>
-                            <li class="login-form"> <a href="{{ route('login') }}" title="Login">Login</a></li>
+                            <li class="login-form"> <a href="{{ route('register') }}" title="Register">S'inscrire</a></li>
+                            <li class="login-form"> <a href="{{ route('login') }}" title="Login">Se connecter</a></li>
                         @endif
                     @endif
 
@@ -79,7 +79,7 @@
                 <div class="row visible-md visible-lg">
                     
                     <div class="col-md-3 col-xs-6 col-sm-6">
-                        <h3>CONTACT US</h3>
+                        <h3>CONTACTEZ-NOUS</h3>
                         <ul class="contact_footer" style="color: aliceblue;">
                             <li class="location">
                                 <i class="fa fa-map-marker"></i> Bensouda, Fes, Morroco
@@ -91,7 +91,7 @@
                                 <i class="fa fa-headphones"></i>+212-658619374
                             </li>
                         </ul>
-                        <h3 style="margin-top: 10px">FOLLOW US</h3>
+                        <h3 style="margin-top: 10px">SUIVEZ-NOUS</h3>
                         <ul class="social">
                             <li class="facebook"><span><i class="fa fa-facebook"></i></span><a href="#"></a></li>
                             <li class="github"><span><i class="fa fa-github"></i></span><a href="#"></a></li>
@@ -105,11 +105,11 @@
                     <div class="row">
                         <div class="col-md-6">
                             <ul class="nav-footer">
-                                <li><a href="{{ route('home.contact') }}">Contact Us</a></li>
+                                <li><a href="{{ route('home.contact') }}">CONTACTEZ-NOUS</a></li>
                             </ul>
                         </div>
                         <div class="col-md-6">
-                            <p class="text-xs-center crtext">&copy; 2024 ServiceNet. All Rights Reserved.</p>
+                            <p class="text-xs-center crtext">&copy; 2024 ServiceNet. Tous droits réservés.</p>
                         </div>
                     </div>
                 </div>

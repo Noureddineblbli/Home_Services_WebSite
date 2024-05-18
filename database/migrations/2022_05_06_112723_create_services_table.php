@@ -20,13 +20,9 @@ return new class extends Migration
             $table->string('tagline');
             $table->bigInteger('service_category_id')->unsigned()->nullable();
             $table->decimal('price');
-            $table->decimal('discount')->nullable();
-            $table->enum('discount_type', ['fixed', 'percent'])->nullable();
             $table->string('image')->nullable();
             $table->string('thumbnail')->nullable();
             $table->longText('description')->nullable();
-            $table->longText('inclusion')->nullable();
-            $table->longText('exclusion')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
 

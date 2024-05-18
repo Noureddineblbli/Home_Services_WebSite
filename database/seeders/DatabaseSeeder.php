@@ -18,8 +18,11 @@ class DatabaseSeeder extends Seeder
          $this->call([
              ServiceCategorySeeder::class
          ]);
+         $this->call([
+            ServiceSeeder::class
+        ]);
 
 
-          \App\Models\Service::factory(20)->create();
+        //   \App\Models\Service::factory(20)->create();
     }
 }

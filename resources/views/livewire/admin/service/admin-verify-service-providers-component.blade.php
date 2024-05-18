@@ -21,13 +21,13 @@
                                             <p>{{ $PendingSprovider->about }}</p>
                                             <p><b>Email : </b>{{ $PendingSprovider->user->email }}</p>
                                             <p><b>Phone : </b>{{ $PendingSprovider->user->phone }}</p>
-                                            <p><b>City : </b>{{ $PendingSprovider->city }}</p>
+                                            <p><b>City : </b>{{ $PendingSprovider->user->city }}</p>
                                             <p><b>Service Category : </b>
                                                 @if ($PendingSprovider->service_category_id)
                                                 {{ $PendingSprovider->category->name }}
                                                 @endif
                                             </p>
-                                            <p><b>Service Locations : </b>{{ $PendingSprovider->service_location }}</p>
+                                            <p><b>Service Locations : </b>{{ $PendingSprovider->user->address }}</p>
                                             @if ($PendingSprovider->cv)
                                                 <p><a href="{{ asset('images/sproviders/CV/' . $PendingSprovider->cv) }}" target="_blank">View CV</a></p>
                                             @endif

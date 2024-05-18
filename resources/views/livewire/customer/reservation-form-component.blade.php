@@ -33,7 +33,7 @@
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
                                     <div class="col-md-6">
-                                        <input id="name" type="text" class="form-control" name="name" value="@auth{{(Auth::user()->name)}}@endif" wire:model="client_name">
+                                        <input id="name" type="text" class="form-control" name="name" wire:model="client_name">
                                         @error('client_name')
                                                     <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -43,7 +43,7 @@
                                 <div class="form-group row">
                                     <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
                                     <div class="col-md-6">
-                                        <input id="email" type="email" class="form-control" name="email" value="@auth{{(Auth::user()->email)}}@endif" wire:model="client_email">
+                                        <input id="email" type="email" class="form-control" name="email" wire:model="client_email">
                                         @error('client_email')
                                                     <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -53,7 +53,7 @@
                                 <div class="form-group row">
                                     <label for="phone" class="col-md-4 col-form-label text-md-right">Phone</label>
                                     <div class="col-md-6">
-                                        <input id="phone" type="text" class="form-control" name="phone" value="@auth{{(Auth::user()->phone)}}@endif" wire:model="client_phone">
+                                        <input id="phone" type="text" class="form-control" name="phone" wire:model="client_phone">
                                         @error('client_phone')
                                                     <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -63,15 +63,15 @@
                                 <div class="form-group row">
                                     <label for="city" class="col-md-4 col-form-label text-md-right">City</label>
                                     <div class="col-md-6">
-                                        <select id="city" class="form-control" name="city" wire:model="client_city">
+                                        <select id="city" class="form-control" name="city" wire:model="reservation_city">
                                             <option value="">Select City</option>
                                             @foreach ($cities as $city)
-                                                <option value="{{ $city }}">
+                                                <option value="{{ $city }}" @if($reservation_city == $city) selected @endif>
                                                     {{ $city }}
                                                 </option>
                                             @endforeach
                                         </select>
-                                        @error('client_city')
+                                        @error('reservation_city')
                                                     <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
@@ -80,8 +80,8 @@
                                 <div class="form-group row">
                                     <label for="Adresse" class="col-md-4 col-form-label text-md-right">Adresse</label>
                                     <div class="col-md-6">
-                                        <input id="adresse" type="text" class="form-control" name="adresse" value="@auth{{(Auth::user()->adresse)}}@endif" wire:model="client_adresse">
-                                        @error('client_adresse')
+                                        <input id="adresse" type="text" class="form-control" name="adresse" wire:model="reservation_address">
+                                        @error('client_address')
                                                     <div class="text-danger">{{ $message }}</div>
                                         @enderror
                                     </div>

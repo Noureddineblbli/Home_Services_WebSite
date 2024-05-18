@@ -36,9 +36,9 @@
                                     <a class="g-list" href="{{ route('home.service_details', ['service_slug' => $service->slug]) }}">
                                         <div class="img-hover">
                                             <img src="{{ asset('images/services/thumbnails') }}/{{ $service->thumbnail }}" alt="{{ $service->name }}"
-                                                class="img-responsive">
+                                                class="img-responsive" style="width: 100%;height:200px;">
                                         </div>
-                                        <div class="info-gallery">
+                                        <div class="info-gallery" style="height:200px;">
                                             <h3>{{ $service->name }}</h3>
                                             <hr class="separator">
                                             <p>{{ $service->tagline }}</p>

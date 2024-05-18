@@ -27,13 +27,13 @@
                                             <p>{{ $sprovider->about }}</p>
                                             <p><b>Email : </b>{{ $sprovider->user->email }}</p>
                                             <p><b>Phone : </b>{{ $sprovider->user->phone }}</p>
-                                            <p><b>City : </b>{{ $sprovider->city }}</p>
+                                            <p><b>City : </b>{{ $sprovider->user->city }}</p>
                                             <p><b>Service Category : </b>
                                                 @if ($sprovider->service_category_id)
                                                 {{ $sprovider->category->name }}
                                                 @endif
                                             </p>
-                                            <p><b>Service Locations : </b>{{ $sprovider->service_location }}</p>
+                                            <p><b>Service Locations : </b>{{ $sprovider->user->address }}</p>
                                             @if ($sprovider->cv)
                                                 <p><a href="{{ asset('images/sproviders/CV/' . $sprovider->cv) }}" target="_blank">View CV</a></p>
                                             @endif

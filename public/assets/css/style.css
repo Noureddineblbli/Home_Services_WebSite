@@ -953,7 +953,12 @@ span.custom-select {
 .filter-header input[type="submit"]{
 	width: 16%;
 	border: 0;
-	color: #ED9455;
+	color: #245580;
+	transition: background-color 0.3s ease;
+}
+.filter-header input[type="submit"]:hover {
+	background-color: #ED9455;
+
 }
 
 /* Calendar -------------------------------------------*/

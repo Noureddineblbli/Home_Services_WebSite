@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
 use Laravel\Jetstream\Jetstream;
-use Illuminate\Auth\Events\Registered;
 use Carbon\Carbon;
 use Livewire\WithFileUploads;
 
@@ -30,6 +29,8 @@ class CreateNewUser implements CreatesNewUsers
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => $this->passwordRules(),
             'phone' => ['required'],
+            'city' => ['required', 'string', 'max:255'],
+            'address' => ['required', 'string', 'max:255'],
             'cv' => $input['registeras'] === 'SVP' ?'required|mimes:png,jpg,jpeg' : '',
             'diploma' => $input['registeras'] === 'SVP' ?'required|mimes:png,jpg,jpeg' : '',
             'service_category' => $input['registeras'] === 'SVP' ?'required' : '',
@@ -43,29 +44,27 @@ class CreateNewUser implements CreatesNewUsers
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
             'phone' => $input['phone'],
+            'city' => $input['city'],
+            'address' => $input['address'],
             'utype' => $registeras
         ]);
 
         if ($registeras === 'SVP') {
-
-            $ServiceProvider=ServiceProvider::create([
-                'user_id' => $user->id
-            ]);
             
             $cv_imageName= Carbon::now()->timestamp . '.' . $input['cv']->extension();
             $input['cv']->storeAs('sproviders/CV', $cv_imageName);
-            $ServiceProvider->cv = $cv_imageName;
 
             $diploma_imageName= Carbon::now()->timestamp . '.' . $input['diploma']->extension();
             $input['diploma']->storeAs('sproviders/DIPLOMA', $diploma_imageName);
-            $ServiceProvider->diploma = $diploma_imageName; 
 
-            $ServiceProvider->service_category_id = $input['service_category'];
-            
-            $ServiceProvider->save();
+            ServiceProvider::create([
+                'user_id' => $user->id,
+                'service_category_id'=> $input['service_category'],
+                'cv' => $cv_imageName,
+                'diploma' => $diploma_imageName,
+            ]);
         }
 
-        event(new Registered($user));
 
         return $user;
     }

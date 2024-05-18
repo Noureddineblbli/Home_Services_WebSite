@@ -8,11 +8,10 @@
 <body>
     <p>Dear ahmed,</p>
     
-    <p>You've been selected for an appointment on {{ $reservation->date }} at {{ $reservation->time }}, located at {{ $client->adresse }}, serving {{ $client->name }}.</p>
+    <p>You've been selected for an appointment on {{ $reservation->date }} at {{ $reservation->time }}, located at {{ $reservation->adresse }}, serving {{ $client->name }}.</p>
     <h1>here are his informations : </h1>
     <p>Email: {{ $client->email }}</p>
     <p>Phone: {{ $client->phone }}</p>
-    <p>Address: {{ $client->adresse }}</p>
     
     <p>Please confirm your availability promptly by clicking this link: <a href="{{route('login')}}">Link to Validate Reservation</a>.</p>
     

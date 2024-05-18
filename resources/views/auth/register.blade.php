@@ -3,12 +3,12 @@
         <div class="bg_parallax image_02_parallax"></div>
         <div class="opacy_bg_02">
             <div class="container">
-                <h1>Registeration</h1>
+                <h1>Inscription</h1>
                 <div class="crumbs">
                     <ul>
-                        <li><a href="/">Home</a></li>
+                        <li><a href="/">Accueil</a></li>
                         <li>/</li>
-                        <li>Registeration</li>
+                        <li>Inscription</li>
                     </ul>
                 </div>
             </div>
@@ -22,11 +22,11 @@
                 <div class="container">
                     <div class="col-xs-12 col-sm-6 col-md-6 col-md-offset-3 profile1" style="padding-bottom:40px;">
                         <div class="thinborder-ontop">
-                            <h3>User Info</h3>
+                            <h3>Informations d'utilisateur</h3>
                             <form id="userregisterationform" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group row">
-                                    <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
+                                    <label for="name" class="col-md-4 col-form-label text-md-right">Nom</label>
                                     <div class="col-md-6">
                                         <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}"  required="" autofocus="">
                                         @error('name')
@@ -36,7 +36,7 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="email" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+                                    <label for="email" class="col-md-4 col-form-label text-md-right">Addresse e-mail</label>
                                     <div class="col-md-6">
                                         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"  required="">
                                         @error('email')
@@ -47,7 +47,7 @@
 
                                 <div class="form-group row">
                                     <label for="password"
-                                        class="col-md-4 col-form-label text-md-right">Password</label>
+                                        class="col-md-4 col-form-label text-md-right">Mot de passe</label>
                                     <div class="col-md-6">
                                         <input id="password" type="password" class="form-control" name="password" value="{{ old('password') }}" required="">
                                         @error('password')
@@ -58,14 +58,14 @@
                                 </div>
                                 <div class="form-group row">
                                     <label for="password-confirm"
-                                        class="col-md-4 col-form-label text-md-right">Confirm Password</label>
+                                        class="col-md-4 col-form-label text-md-right">Confirmez le mot de passe</label>
                                     <div class="col-md-6">
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" value="{{ old('password_confirmation') }}" required="">
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="phone" class="col-md-4 col-form-label text-md-right">Phone</label>
+                                    <label for="phone" class="col-md-4 col-form-label text-md-right">Téléphone</label>
                                     <div class="col-md-6">
                                         <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required="">
                                         @error('phone')
@@ -74,12 +74,45 @@
                                     </div>
                                 </div>
 
+                                @php
+                                    $cities = [
+                                        'Agadir','Asilah','Azrou','Beni Mellal','Berrechid','Boujdour','Casablanca','Chefchaouen','Dakhla','El Jadida','Essaouira','Errachidia','Fez','Guelmim','Ifrane','Kenitra','Khenifra','Ksar el-Kebir','Khouribga','Laayoune','Larache','Lixus','Marrakech','Meknes','Midelt','Nador','Ouarzazate','Oujda','Rabat','Safi','Sefrou','Sidi Ifni','Sidi Kacem','Sidi Slimane','Skhirat','Tangier','Tan-Tan','Taourirt','Taroudant','Taza','Tétouan','Tinghir','Tiznit'   
+                                    ];
+                                @endphp
+
                                 <div class="form-group row">
-                                    <label for="registeras" class="col-md-4 col-form-label text-md-right">Registered As</label>
+                                    <label for="city" class="col-md-4 col-form-label text-md-right">Ville</label>
+                                    <div class="col-md-6">
+                                        <select id="city" class="form-control" name="city">
+                                            <option value="">Select City</option>
+                                            @foreach ($cities as $city)
+                                                <option value="{{ $city }}">
+                                                    {{ $city }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('city')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="Addresse" class="col-md-4 col-form-label text-md-right">Addresse</label>
+                                    <div class="col-md-6">
+                                        <input id="addresse" type="text" class="form-control" name="address" value="{{ old('addresse') }}" required="">
+                                        @error('addresse')
+                                                    <div class="text-danger">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="registeras" class="col-md-4 col-form-label text-md-right">Enregistré comme</label>
                                     <div class="col-md-6">
                                         <select class="form-control" name="registeras" id="registeras">
-                                        <option value="CST" {{ old('registeras') == 'CST' ? 'selected' : '' }}>Customer</option>
-                                        <option value="SVP" {{ old('registeras') == 'SVP' ? 'selected' : '' }}>Service Provider</option>
+                                        <option value="CST" {{ old('registeras') == 'CST' ? 'selected' : '' }}>Client</option>
+                                        <option value="SVP" {{ old('registeras') == 'SVP' ? 'selected' : '' }}>Prestataire de service</option>
                                         </select>
                                     </div>
                                 </div>
@@ -95,7 +128,7 @@
                                 </div>
 
                                 <div class="form-group row additional-fields" style="display: none;">
-                                    <label for="diploma" class="col-md-4 col-form-label text-md-right">Diploma</label>
+                                    <label for="diploma" class="col-md-4 col-form-label text-md-right">Diplome</label>
                                     <div class="col-md-6">
                                         <input id="diploma" type="file" class="form-control" name="diploma">
                                         @error('diploma')
@@ -109,7 +142,7 @@
                                 @endphp
 
                                 <div class="form-group row additional-fields" style="display: none;">
-                                    <label for="service_category" class="col-md-4 col-form-label text-md-right">Service Category</label>
+                                    <label for="service_category" class="col-md-4 col-form-label text-md-right">Catégorie de services</label>
                                     <div class="col-md-6">
                                         <select id="service_category" name="service_category" class="form-control" required>
                                             <option value="">Select Service Category</option>
@@ -126,23 +159,12 @@
 
                                 <div class="form-group row mb-0">
                                     <div class="col-md-10">
-                                        <span style="font-size: 14px;">If you have already registered <a
-                                                href="{{ route('login') }}" title="Login">click here</a> to login</span>
-                                        <button type="submit" class="btn btn-primary pull-right">Register</button>
+                                        <span style="font-size: 14px;">Si vous êtes déjà inscrit <a
+                                                href="{{ route('login') }}" title="Login">cliquez ici</a> pour se connecter</span>
+                                        <button type="submit" class="btn btn-primary pull-right">S'inscrire</button>
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="section-twitter">
-            <i class="fa fa-twitter icon-big"></i>
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="text-center">
                         </div>
                     </div>
                 </div>

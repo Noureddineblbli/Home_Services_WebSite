@@ -22,7 +22,7 @@
                     <ul>
                         <li><a href="/">Home</a></li>
                         <li>/</li>
-                        <li>Service Providers</li>
+                        <li>Reservations</li>
                     </ul>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                                             @if($showHistory)
                                                 Reservation History
                                             @else
-                                                Pending Service Providers
+                                                Pending reservations
                                             @endif
                                         </div>
                                         <div class="col-md-6">
@@ -60,15 +60,15 @@
                                     @if (Session::has('message'))
                                     <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
                                     @endif
-                                    <table class="table table-striped">
+                                    <table class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
                                                 <th>Service Name</th>
                                                 <th>Client's Name</th>
-                                                <th>Address</th>
                                                 <th>Email</th>
                                                 <th>Phone</th>
+                                                <th>Address</th>
                                                 <th>Reservation Date</th>
                                                 <th>Reservation Hour</th>
                                                 @if(!$showHistory)
@@ -80,11 +80,11 @@
                                             @foreach($reservations as $key => $reservation)
                                             <tr id="row_{{ $key }}">
                                                 <td>{{ $key + 1 }}</td>
-                                                <td>{{ $reservation->servicName }}</td>
+                                                <td>{{ $reservation->serviceName }}</td>
                                                 <td>{{ $reservation->name }}</td>
-                                                <td>{{ $reservation->Adresse }}</td>
                                                 <td>{{ $reservation->email }}</td>
                                                 <td>{{ $reservation->phone }}</td>
+                                                <td>{{ $reservation->address }}</td>
                                                 <td>{{ $reservation->date }}</td>
                                                 <td>{{ $reservation->time }}</td>
                                                 @if(!$showHistory)

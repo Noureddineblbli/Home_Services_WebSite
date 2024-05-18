@@ -9,7 +9,7 @@ class ServiceProvider extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id'];
+    protected $fillable = ['user_id','cv','diploma','service_category_id'];
 
     public function category()
     {

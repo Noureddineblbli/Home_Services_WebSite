@@ -45,13 +45,13 @@
                                             <p>{{ $sprovider->about }}</p>
                                             <p><b>Email : </b>{{ Auth::user()->email }}</p>
                                             <p><b>Phone : </b>{{ Auth::user()->phone }}</p>
-                                            <p><b>City : </b>{{ $sprovider->city }}</p>
+                                            <p><b>City : </b>{{ Auth::user()->city }}</p>
                                             <p><b>Service Category : </b>
                                                 @if ($sprovider->service_category_id)
                                                 {{ $sprovider->category->name }}
                                                 @endif
                                             </p>
-                                            <p><b>Service Locations : </b>{{ $sprovider->service_location }}</p>
+                                            <p><b>Service Locations : </b>{{ Auth::user()->address }}</p>
                                             <a href="{{ route('sprovider.edit_profile') }}" class="btn btn-info pull-right">Edit Profile</a>
                                         </div>
                                     </div>

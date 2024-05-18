@@ -13,19 +13,11 @@ class SproviderDashboardComponent extends Component
 
 
     
-    public  $sprovider_id;
-    public  $categorie;
-    public  $reservations;
+    public $sprovider_id;
+    public $categorie;
+    public $reservations;
     public $showHistory = false;
     public $userId;
-
-    
-    
-
-
-
-
-
 
     public function mount($id)
     {
@@ -36,15 +28,8 @@ class SproviderDashboardComponent extends Component
 
         $this->categorie = ServiceProvider::where('id', $this->sprovider_id)->value('service_category_id');
 
-
-        // Your category ID
-
-
-        // Retrieve reservations
-
-        
-           $this->reservations = Reservation::select('clients.name', 'clients.Adresse', 'clients.email', 'clients.phone', 'reservations.date', 'reservations.time', 'reservations.id',
-           'services.name as servicName')
+           $this->reservations = Reservation::select('clients.name', 'clients.email', 'clients.phone', 'reservations.address', 'reservations.date', 'reservations.time', 'reservations.id',
+           'services.name as serviceName')
             ->join('clients', 'reservations.client_id', '=', 'clients.id')
             ->join('services', 'reservations.service_id', '=', 'services.id')
             ->join('service_categories', 'services.service_category_id', '=', 'service_categories.id')
@@ -53,11 +38,6 @@ class SproviderDashboardComponent extends Component
             ->where('reservations.status', 'en attent')
             ->get();
 
-            
-
-         
-       
-
     }
 
     public function toggleShowHistory()
@@ -65,7 +45,7 @@ class SproviderDashboardComponent extends Component
         $this->showHistory = !$this->showHistory;
         
            if($this->showHistory){
-            $this->reservations = Reservation::select('clients.name', 'clients.Adresse', 'clients.email', 'clients.phone', 'reservations.date', 'reservations.time','services.name as servicName')
+            $this->reservations = Reservation::select('clients.name', 'clients.email', 'clients.phone','reservations.address', 'reservations.date', 'reservations.time','services.name as servicName')
               ->join('clients', 'reservations.client_id', '=', 'clients.id')
               ->join('services', 'reservations.service_id', '=', 'services.id')
               ->where('reservations.serviceprovider_id', $this->sprovider_id)
@@ -73,10 +53,7 @@ class SproviderDashboardComponent extends Component
             }
             else{
                 $this->initialize($this->userId);
-            }
-
-
-         
+            }    
     }
       
     public function verifyReservation($reservationId)
@@ -86,8 +63,6 @@ class SproviderDashboardComponent extends Component
         $reservation->serviceprovider_id = $this->sprovider_id;
         $reservation->save();
         $this->initialize($this->userId);
-
-        
     }
 
     private function initialize($id)
@@ -96,14 +71,8 @@ class SproviderDashboardComponent extends Component
 
         $this->categorie = ServiceProvider::where('id', $this->sprovider_id)->value('service_category_id');
 
-
-        // Your category ID
-
-
-        // Retrieve reservations
-
         
-           $this->reservations = Reservation::select('clients.name', 'clients.Adresse', 'clients.email', 'clients.phone', 'reservations.date', 'reservations.time', 'reservations.id','services.name as servicName')
+           $this->reservations = Reservation::select('clients.name', 'clients.email', 'clients.phone','reservations.address', 'reservations.date', 'reservations.time', 'reservations.id','services.name as servicName')
             ->join('clients', 'reservations.client_id', '=', 'clients.id')
             ->join('services', 'reservations.service_id', '=', 'services.id')
             ->join('service_categories', 'services.service_category_id', '=', 'service_categories.id')

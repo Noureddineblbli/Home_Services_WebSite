@@ -18,9 +18,7 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->string('image')->nullable();
             $table->string('about')->nullable();
-            $table->string('city')->nullable();
             $table->bigInteger('service_category_id')->unsigned()->nullable();
-            $table->string('service_location')->nullable();
             $table->string('cv')->nullable();
             $table->string('diploma')->nullable();
             $table->boolean('verified_by_admin')->default(0);

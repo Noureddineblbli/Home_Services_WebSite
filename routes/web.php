@@ -27,10 +27,13 @@ use App\Http\Livewire\Sprovider\EditSproviderProfileComponent;
 use App\Http\Livewire\Admin\Service\AdminServiceCategoryComponent;
 use App\Http\Livewire\Admin\Service\AdminServiceProvidersComponent;
 use App\Http\Livewire\Admin\Service\AdminAddServiceCategoryComponent;
-use App\Http\Livewire\Admin\Service\AdminServicesByCategoryComponent;
 use App\Http\Livewire\Admin\Service\AdminEditServiceCategoryComponent;
 use App\Http\Livewire\Admin\Service\AdminServiceProvidersDetailsComponent;
 use App\Http\Livewire\Admin\Service\AdminVerifyServiceProvidersComponent;
+<<<<<<< HEAD
+=======
+use App\Http\Livewire\Admin\Service\AdminServicesByCategoryComponent;
+>>>>>>> 140e004676f533b88c78901482071f2c9e727b3a
 use App\Http\Livewire\Admin\Service\AdminPendingServiceProvidersComponent;
 
 

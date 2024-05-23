@@ -157,7 +157,6 @@ class ReservationFormComponent extends Component
         $cities = [
              'Agadir','Asilah','Azrou','Beni Mellal','Berrechid','Boujdour','Casablanca','Chefchaouen','Dakhla','El Jadida','Essaouira','Errachidia','Fez','Guelmim','Ifrane','Kenitra','Khenifra','Ksar el-Kebir','Khouribga','Laayoune','Larache','Lixus','Marrakech','Meknes','Midelt','Nador','Ouarzazate','Oujda','Rabat','Safi','Sefrou','Sidi Ifni','Sidi Kacem','Sidi Slimane','Skhirat','Tangier','Tan-Tan','Taourirt','Taroudant','Taza','Tétouan','Tinghir','Tiznit'   
         ];
-
-        return view('livewire.customer.reservation-form-component',['timeSlots'=>$timeSlots,'cities' => $cities,'service'])->layout('layouts.base');
+        return view('livewire.customer.reservation-form-component',['timeSlots'=>$timeSlots,'cities' => $cities,'service','serviceProviders'=> $this->serviceProviders])->layout('layouts.base');
     }
 }

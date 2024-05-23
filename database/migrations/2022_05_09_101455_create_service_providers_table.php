@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('cv')->nullable();
             $table->string('diploma')->nullable();
             $table->boolean('verified_by_admin')->default(0);
+            $table->boolean('Activation')->default(1);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

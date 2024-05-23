@@ -63,19 +63,25 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($sproviders as $sprovider)
-                                            
-                                            <tr onclick="window.location.href='{{ route('admin.service_provider.details', ['sprovider_id' => $sprovider->id]) }}'">
-                                                <td>{{ $sprovider->user->name }}</td>
-                                                <td>{{ $sprovider->user->email }}</td>
-                                                <td>{{ $sprovider->user->phone }}</td>
-                                                <td>{{ $sprovider->user->city }}</td>
-                                                <td>{{ $sprovider->category->name }}</td>
-                                                <td>{{ $sprovider->user->address }}</td>
-                                                <td class="view-details">View Details</td>
-                                            </tr>
-                                             
-                                            @endforeach
+                                            @if($sproviders->count() > 0)
+                                                @foreach ($sproviders as $sprovider)
+                                                
+                                                <tr onclick="window.location.href='{{ route('admin.service_provider.details', ['sprovider_id' => $sprovider->id]) }}'">
+                                                    <td>{{ $sprovider->user->name }}</td>
+                                                    <td>{{ $sprovider->user->email }}</td>
+                                                    <td>{{ $sprovider->user->phone }}</td>
+                                                    <td>{{ $sprovider->user->city }}</td>
+                                                    <td>{{ $sprovider->category->name }}</td>
+                                                    <td>{{ $sprovider->user->address }}</td>
+                                                    <td class="view-details">View Details</td>
+                                                </tr>
+                                                
+                                                @endforeach
+                                            @else
+                                                <tr>
+                                                    <td colspan="9" class="text-center" style="color:red;"><strong>Aucun prestataire disponible.</strong></td>
+                                                </tr>
+                                            @endif
                                         </tbody>
                                     </table>
                                     {{ $sproviders->links() }}

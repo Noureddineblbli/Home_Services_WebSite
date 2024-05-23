@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Service Provider Dashboard</title>
 
     <!-- Montserrat Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -36,33 +36,13 @@
         
         <ul class="sidebar-list" style="font-weight: 600;">
           <li class="sidebar-list-item">
-            <a href="{{ route('admin.dashboard') }}">
-              <span class="material-icons-outlined">dashboard</span> Dashboard
+            <a href="{{ route('sprovider.dashboard',['id' => Auth::user()->id]) }}">
+              <span class="material-icons-outlined">dashboard</span> Dashboard 
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="{{ route('admin.service_categories') }}">
-            <span class="material-icons-outlined">category</span> Service categorie
-            </a>
-          </li>
-          <li class="sidebar-list-item">
-            <a href="{{ route('admin.all_services') }}">
-            <span class="material-icons-outlined">construction</span> Services
-            </a>
-          </li>
-          <li class="sidebar-list-item">
-            <a href="{{ route('admin.service_providers') }}" >
-            <span class="material-icons-outlined">group</span> Service Providers
-            </a>
-          </li>
-          <li class="sidebar-list-item">
-            <a href="{{ route('admin.slider') }}" >
-            <span class="material-icons-outlined">slideshow</span> Sliders
-            </a>
-          </li>
-          <li class="sidebar-list-item">
-            <a href="{{ route('admin.contacts') }}" >
-            <span class="material-icons-outlined">contacts</span> Contacts
+            <a href="{{ route('sprovider.profile') }}">
+                <span class="material-icons-outlined">account_circle</span> Profile
             </a>
           </li>
           <li class="sidebar-list-item">

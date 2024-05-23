@@ -22,7 +22,15 @@ class AdminServicesByCategoryComponent extends Component
 
     public function deleteConfirmation($id) {
         $this->delete_id= $id;
-        $this->dispatchBrowserEvent('show-confirmation');
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'title' => 'Êtes-vous sûr de vouloir supprimer ce service ?',
+            'text' => "",
+            'icon' => 'warning',
+            'confirmButtonText' => 'Oui, supprimez-le !',
+            'cancelButtonText' => 'Non, annulez !',
+            'confirmButtonColor' => '#3085d6',
+            'cancelButtonColor' => '#d33'
+        ]);
         
     }
 
@@ -39,7 +47,11 @@ class AdminServicesByCategoryComponent extends Component
         }
 
         $service->delete();
-        session()->flash('message', 'Service has been deleted successfully!');
+        $this->dispatchBrowserEvent('swal:response', [
+            'title' => 'Supprimé !',
+            'text' => 'le service a été supprimé.',
+            'icon' => 'success'
+        ]);
 
 
     }

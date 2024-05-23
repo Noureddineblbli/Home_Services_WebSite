@@ -53,6 +53,7 @@
 </head>
 <body>
     <div class="card">
+        <img src="{{ asset('images/Envelope_Icon.png') }}" style="width: 70px;">
         <h1>Vérifier Email</h1>
         <p>Merci pour l'enregistrement! Avant de commencer, pourriez-vous vérifier votre adresse e-mail en cliquant sur le lien que nous venons de vous envoyer par e-mail ? Si vous n'avez pas reçu l'e-mail, nous vous en enverrons volontiers un autre.</p>
     

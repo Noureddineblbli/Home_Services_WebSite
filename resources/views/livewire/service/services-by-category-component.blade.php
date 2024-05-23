@@ -3,10 +3,10 @@
         <div class="bg_parallax image_01_parallax"></div>
         <div class="opacy_bg_02">
             <div class="container">
-                <h1>{{ $scategory->name }} Services</h1>
+                <h1>Services de {{ $scategory->name }} </h1>
                 <div class="crumbs">
                     <ul>
-                        <li><a href="/">Home</a></li>
+                        <li><a href="/">Accueil</a></li>
                         <li>/</li>
                         <li>{{ $scategory->name }}</li>
                     </ul>
@@ -18,8 +18,8 @@
         <div class="container">
             <div class="row" style="margin-top: -30px;">
                 <div class="titles">
-                    <h2>{{ $scategory->name }} <span>Services</span></h2>
-                    <i class="fa fa-plane"></i>
+                    <h2>Services de <span>{{ $scategory->name }}</span></h2>
+                    
                     <hr class="tall">
                 </div>
             </div>
@@ -43,15 +43,15 @@
                                             <hr class="separator">
                                             <p>{{ $service->tagline }}</p>
                                             <div class="content-btn"><a href="{{ route('home.service_details', ['service_slug' => $service->slug]) }}"
-                                                    class="btn btn-primary">Book Now</a></div>
-                                            <div class="price"><span>&#36;</span><b>From</b>{{ $service->price }}</div>
+                                                    class="btn btn-primary">Réservez</a></div>
+                                            <div class="price"><span>&#36;</span><b>Depuis</b>{{ $service->price }}</div>
                                         </div>
                                     </a>
                                 </div>
                             @endforeach
                         @else
                             <div class="col-md-12" style="padding-bottom: 30px">
-                                <h5 class="text-center">There is no service available!</h5>
+                                <h5 class="text-center" style="color:red;">Aucun service n'est disponible!</h5>
                             </div>
                         @endif
 

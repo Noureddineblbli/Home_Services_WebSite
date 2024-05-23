@@ -26,6 +26,9 @@ class AuthSprovider
             if ($user->utype === 'SVP' && !$serviceProvider->verified_by_admin) {
                 return redirect()->route('waiting_page');
             }
+            if ($user->utype === 'SVP' && !$serviceProvider->Activation) {
+                return redirect()->route('account_Disabled');
+            }
                 return $next($request);   
         } else {
             session()->flush();

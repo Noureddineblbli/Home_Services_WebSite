@@ -13,6 +13,31 @@ class AdminServiceProvidersDetailsComponent extends Component
         $this->SproviderId = $sprovider_id;
         
     }
+
+    public function disableAccount($id){
+        $serviceProvider = ServiceProvider::where('id',$id)->first();
+        $serviceProvider->Activation = 0;
+        $serviceProvider->save();
+
+        $this->dispatchBrowserEvent('swal:response', [
+            'title' => 'Désactivé!',
+            'text' => 'Le compte a été désactivé avec succès.',
+            'icon' => 'success'
+        ]);
+    }
+
+    public function inableAccount($id){
+        $serviceProvider = ServiceProvider::where('id',$id)->first();
+        $serviceProvider->Activation = 1;
+        $serviceProvider->save();
+
+        $this->dispatchBrowserEvent('swal:response', [
+            'title' => 'Activé!',
+            'text' => 'Le compte a été activé avec succès.',
+            'icon' => 'success'
+        ]);
+    }
+
     public function render()
     {
         $sprovider = ServiceProvider::where('id',$this->SproviderId)->first();

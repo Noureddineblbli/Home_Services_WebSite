@@ -18,11 +18,11 @@ class Reservation extends Model
 
     public function client()
     {
-        return $this->belongsTo(User::class, 'client_id');
+        return $this->belongsTo(client::class, 'client_id');
     }
 
     public function serviceProvider()
     {
-        return $this->belongsTo(ServiceProvider::class, 'service_provider_id');
+        return $this->belongsTo(ServiceProvider::class, 'serviceprovider_id');
     }
 }

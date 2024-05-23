@@ -35,16 +35,22 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($contacts as $contact)
+                                            @if($contacts->count() > 0)
+                                                @foreach ($contacts as $contact)
+                                                    <tr>
+                                                        <td>{{ $contact->id }}</td>
+                                                        <td>{{ $contact->name }}</td>
+                                                        <td>{{ $contact->email }}</td>
+                                                        <td>{{ $contact->phone }}</td>
+                                                        <td>{{ $contact->message }}</td>
+                                                        <td>{{ $contact->created_at }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
                                                 <tr>
-                                                    <td>{{ $contact->id }}</td>
-                                                    <td>{{ $contact->name }}</td>
-                                                    <td>{{ $contact->email }}</td>
-                                                    <td>{{ $contact->phone }}</td>
-                                                    <td>{{ $contact->message }}</td>
-                                                    <td>{{ $contact->created_at }}</td>
+                                                    <td colspan="9" class="text-center" style="color:red;"><strong>Aucun contact disponible.</strong></td>
                                                 </tr>
-                                            @endforeach
+                                            @endif
                                         </tbody>
                                     </table>
                                     {{ $contacts->links() }}

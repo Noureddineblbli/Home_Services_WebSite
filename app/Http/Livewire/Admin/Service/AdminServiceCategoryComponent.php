@@ -16,7 +16,15 @@ class AdminServiceCategoryComponent extends Component
 
     public function deleteConfirmation($id) {
         $this->delete_id= $id;
-        $this->dispatchBrowserEvent('show-confirmation');
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'title' => 'Êtes-vous sûr de vouloir supprimer cette catégorie de service ?',
+            'text' => "",
+            'icon' => 'warning',
+            'confirmButtonText' => 'Oui, supprimez-la !',
+            'cancelButtonText' => 'Non, annulez !',
+            'confirmButtonColor' => '#3085d6',
+            'cancelButtonColor' => '#d33'
+        ]);
         
     }
 
@@ -29,7 +37,11 @@ class AdminServiceCategoryComponent extends Component
         }
 
         $scategory->delete();
-        session()->flash('message', 'Category has been deleted successfully!');
+        $this->dispatchBrowserEvent('swal:response', [
+            'title' => 'Supprimé !',
+            'text' => 'la catégorie de service a été supprimé.',
+            'icon' => 'success'
+        ]);   
     }
 
     public function render()

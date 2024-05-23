@@ -36,10 +36,10 @@
                 </div>
             </div>
             <div class="container">
+                
                 <div class="row">
                     <div class="col-md-12">
                         <ul id="sponsors" class="tooltip-hover">
-
                             @foreach ($scategories as $scategory)
                                 <li data-toggle="tooltip" data-original-title="{{ $scategory->name }}">
                                     <a href="{{ route('home.services_by_category', ['category_slug' => $scategory->slug]) }}">
@@ -81,7 +81,7 @@
                                         <p>{{ $service->tagline }}</p>
                                         <div class="content-btn"><a href="{{ route('home.service_details', ['service_slug' => $service->slug]) }}"
                                                 class="btn btn-primary">Réservez</a></div>
-                                        <div class="price"><span>&#36;</span><b>à partir de</b>{{ $service->price }}</div>
+                                        <div class="price"><span>&#36;</span><b>Depuis</b>{{ $service->price }}</div>
                                     </div>
                                 </a>
                             </div>
@@ -151,7 +151,7 @@
                                 <p>{{ $aservice->tagline }}</p>
                                 <div class="content-btn"><a href="{{ route('home.service_details', ['service_slug' => $aservice->slug]) }}"
                                         class="btn btn-primary">Réservez</a></div>
-                                <div class="price"><span>&#36;</span><b>à partir de</b>{{ $aservice->price }}</div>
+                                <div class="price"><span>&#36;</span><b>Depuis</b>{{ $aservice->price }}</div>
                             </div>
                         </a>
                     </div>

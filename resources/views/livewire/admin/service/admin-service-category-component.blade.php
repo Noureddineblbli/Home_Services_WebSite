@@ -37,26 +37,32 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($scategories as $scategory)
+                                            @if($scategories->count() > 0)
+                                                @foreach ($scategories as $scategory)
+                                                    <tr>
+                                                        <td>{{ $scategory->id }}</td>
+                                                        <td><img src="{{ asset('images/categories') }}/{{ $scategory->image }}" alt="{{ $scategory->name }}" width="60" /></td>
+                                                        <td>{{ $scategory->name }}</td>
+                                                        <td>{{ $scategory->slug }}</td>
+                                                        <td>
+                                                            @if ($scategory->featured)
+                                                                Yes
+                                                            @else
+                                                                No
+                                                            @endif
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ route('admin.services_by_category', ['category_slug' => $scategory->slug]) }}" style="margin-right: 10px"><i class="fa fa-list fa-2x text-info"></i></a>
+                                                            <a href="{{ route('admin.edit_service_category', ['category_id' => $scategory->id]) }}"><i class="fa fa-edit fa-2x text-info"></i></a>
+                                                            <a href="#"  wire:click.prevent="deleteConfirmation({{$scategory->id}})" style="margin-left: 10px"><i class="fa fa-times fa-2x text-danger"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
                                                 <tr>
-                                                    <td>{{ $scategory->id }}</td>
-                                                    <td><img src="{{ asset('images/categories') }}/{{ $scategory->image }}" alt="{{ $scategory->name }}" width="60" /></td>
-                                                    <td>{{ $scategory->name }}</td>
-                                                    <td>{{ $scategory->slug }}</td>
-                                                    <td>
-                                                        @if ($scategory->featured)
-                                                            Yes
-                                                        @else
-                                                            No
-                                                        @endif
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ route('admin.services_by_category', ['category_slug' => $scategory->slug]) }}" style="margin-right: 10px"><i class="fa fa-list fa-2x text-info"></i></a>
-                                                        <a href="{{ route('admin.edit_service_category', ['category_id' => $scategory->id]) }}"><i class="fa fa-edit fa-2x text-info"></i></a>
-                                                        <a href="#"  wire:click.prevent="deleteConfirmation({{$scategory->id}})" style="margin-left: 10px"><i class="fa fa-times fa-2x text-danger"></i></a>
-                                                    </td>
+                                                    <td colspan="9" class="text-center" style="color:red;"><strong>Aucune catégorie de service disponible.</strong></td>
                                                 </tr>
-                                            @endforeach
+                                            @endif
                                         </tbody>
                                     </table>    
                                     {{ $scategories->links() }}

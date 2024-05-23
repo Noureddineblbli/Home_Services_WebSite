@@ -3,12 +3,12 @@
         <div class="bg_parallax image_01_parallax"></div>
         <div class="opacy_bg_02">
             <div class="container">
-                <h1>Service Categories</h1>
+                <h1>Catégories de services</h1>
                 <div class="crumbs">
                     <ul>
-                        <li><a href="/">Home</a></li>
+                        <li><a href="/">Accueil</a></li>
                         <li>/</li>
-                        <li>Service Categories</li>
+                        <li>Catégories de services</li>
                     </ul>
                 </div>
             </div>
@@ -18,8 +18,7 @@
         <div class="container">
             <div class="row" style="margin-top: -30px;">
                 <div class="titles">
-                    <h2>Service <span>Categories</span></h2>
-                    <i class="fa fa-plane"></i>
+                    <h2>Catégories de <span>services</span></h2>
                     <hr class="tall">
                 </div>
             </div>

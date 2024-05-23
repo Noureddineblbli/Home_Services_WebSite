@@ -29,7 +29,7 @@
 
                 <ul class="collapse">
                     <li class="title">
-                        <a href="/"><img src="{{ asset('images/logo.png') }}" style="width: 55px;"></a>
+                        <a href="/"><img src="{{ asset('images/logo.png') }}" style="width: 100px;"></a>
                     </li>
                     <li style="float: left;"> 
                         <a href="{{ route('home.service_categories') }}"><strong>Catégories de services</strong></a>

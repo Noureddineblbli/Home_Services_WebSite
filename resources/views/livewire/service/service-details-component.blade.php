@@ -66,7 +66,7 @@
                                     <div class="panel-footer">
                                         <form action="{{route('reservationForm',['service_id' => $service->id])}}"> 
                                             <input type="submit" class="btn btn-primary" name="submit"
-                                                value="Book Now">
+                                                value="Réservez">
                                         </form>
                                     </div>
                                 </div>

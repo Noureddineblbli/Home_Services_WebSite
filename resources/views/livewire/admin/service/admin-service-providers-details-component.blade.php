@@ -42,7 +42,11 @@
                                             @if ($sprovider->diploma)
                                                 <p><a href="{{ asset('images/sproviders/DIPLOMA/' . $sprovider->diploma) }}" target="_blank">View Diploma</a></p>
                                             @endif
-                                            <a href="#" class="btn btn-info pull-right">Désactiver compte</a>
+                                            @if($sprovider->Activation == 1)
+                                                <a href='#' wire:click.prevent="disableAccount({{$sprovider->id}})" class="btn btn-info pull-right">Désactiver compte</a>
+                                            @else
+                                                <a href='#' wire:click.prevent="inableAccount({{$sprovider->id}})" class="btn btn-info pull-right">Activer compte</a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

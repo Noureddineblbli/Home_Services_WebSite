@@ -23,7 +23,14 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
-                return redirect(RouteServiceProvider::HOME);
+                $user = Auth::guard($guard)->user();
+                if ($user->utype === 'ADM') {
+                    return redirect('/admin/dashboard');
+                } elseif ($user->utype === 'SVP') {
+                    return redirect('/sprovider/dashboard/' . $user->id);
+                } elseif ($user->utype === 'CST') {
+                    return redirect('/');
+                }
             }
         }
 

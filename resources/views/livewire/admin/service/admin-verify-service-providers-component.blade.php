@@ -36,8 +36,8 @@
                                             @if ($PendingSprovider->diploma)
                                                 <p><a href="{{ asset('images/sproviders/DIPLOMA/' . $PendingSprovider->diploma) }}" target="_blank">View Diploma</a></p>
                                             @endif
-                                            <button wire:click="verifyServiceProvider({{ $PendingSprovider->id }})">Verify</button>
-                                            <button href="#" onclick="confirm('Are you sure, You want to delete this service?') || event.stopImmediatePropagation();" wire:click.prevent="rejectServiceProvider({{ $PendingSprovider->id }})" style="margin-left: 10px"><i class="fa fa-times fa-2x text-danger"></i></button>
+                                            <button wire:click="acceptConfirmation({{ $PendingSprovider->id }})">Verify</button>
+                                            <button wire:click="rejectConfirmation({{ $PendingSprovider->id }})"><i class="fa fa-times fa-2x text-danger"></i></button>
                                         </div>
                                     </div>
                                 </div>

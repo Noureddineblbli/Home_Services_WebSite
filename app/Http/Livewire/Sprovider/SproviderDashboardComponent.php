@@ -14,49 +14,35 @@ use App\Http\Livewire\Customer\ReservationFormComponent;
 class SproviderDashboardComponent extends Component
 {
 
-<<<<<<< HEAD
-
-    
     public $sprovider_id;
     public $categorie;
     public $reservations;
     public $showHistory = false;
     public $userId;
-=======
-    public  $sprovider_id;
-    public  $categorie;
-    public  $reservations;
-    public  $showHistory = false;
-    public  $userId;
     public $city;
     public $reservationDetails;
->>>>>>> 140e004676f533b88c78901482071f2c9e727b3a
 
     public function mount($id)
     {
         $this->userId= $id;
         $this->sprovider_id = ServiceProvider::where('user_id',  $id)->value('id');
-        $this->city = ServiceProvider::select('service_providers.city')
+        $this->city = ServiceProvider::select('users.city')
+        ->join('users', 'service_providers.user_id', '=', 'users.id')
         ->where('service_providers.id', $this->sprovider_id)
-        ->pluck('service_providers.city');
+        ->pluck('users.city');
     
 
         $this->categorie = ServiceProvider::where('id', $this->sprovider_id)->value('service_category_id');
 
-<<<<<<< HEAD
-           $this->reservations = Reservation::select('clients.name', 'clients.email', 'clients.phone', 'reservations.address', 'reservations.date', 'reservations.time', 'reservations.id',
-           'services.name as serviceName')
-=======
 
-           $this->reservations = Reservation::select('clients.name', 'reservations.adresse_maison', 'clients.email', 'clients.phone', 'reservations.date', 'reservations.time', 'reservations.id',
+           $this->reservations = Reservation::select('clients.name', 'reservations.address', 'clients.email', 'clients.phone', 'reservations.date', 'reservations.time', 'reservations.id',
            'services.name as servicName')
->>>>>>> 140e004676f533b88c78901482071f2c9e727b3a
             ->join('clients', 'reservations.client_id', '=', 'clients.id')
             ->join('services', 'reservations.service_id', '=', 'services.id')
             ->join('service_categories', 'services.service_category_id', '=', 'service_categories.id')
             ->where('service_categories.id', $this->categorie)
             ->where('reservations.status', 'en attent')
-            ->where('reservations.ville', $this->city)
+            ->where('reservations.city', $this->city)
             ->whereNotIn('reservations.id', function($query){
                 $query->select('reservation_id')
                       ->from('prestataire_reservation_rejetee')
@@ -64,10 +50,6 @@ class SproviderDashboardComponent extends Component
             })
            ->get();
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 140e004676f533b88c78901482071f2c9e727b3a
     }
 
     public function toggleShowHistory()
@@ -75,11 +57,7 @@ class SproviderDashboardComponent extends Component
         $this->showHistory = !$this->showHistory;
         
            if($this->showHistory){
-<<<<<<< HEAD
-            $this->reservations = Reservation::select('clients.name', 'clients.email', 'clients.phone','reservations.address', 'reservations.date', 'reservations.time','services.name as servicName')
-=======
-            $this->reservations = Reservation::select('clients.name', 'reservations.adresse_maison', 'clients.email', 'clients.phone', 'reservations.date', 'reservations.time','services.name as servicName')
->>>>>>> 140e004676f533b88c78901482071f2c9e727b3a
+            $this->reservations = Reservation::select('clients.name', 'reservations.address', 'clients.email', 'clients.phone', 'reservations.date', 'reservations.time','services.name as servicName')
               ->join('clients', 'reservations.client_id', '=', 'clients.id')
               ->join('services', 'reservations.service_id', '=', 'services.id')
               ->where('reservations.serviceprovider_id', $this->sprovider_id)
@@ -89,7 +67,7 @@ class SproviderDashboardComponent extends Component
                 $this->initialize($this->userId);
             }    
     }
-      
+
     public function verifyReservation($reservationId)
     {
         $reservation = Reservation::find($reservationId);
@@ -97,8 +75,6 @@ class SproviderDashboardComponent extends Component
         $reservation->serviceprovider_id = $this->sprovider_id;
         $reservation->save();
         $this->initialize($this->userId);
-<<<<<<< HEAD
-=======
 
         $this->reservationDetails = Reservation::select(
             'c.name as client_name',
@@ -106,13 +82,13 @@ class SproviderDashboardComponent extends Component
             'u.name as provider_name',
             'u.email as provider_email',
             'u.phone',
-            'r.adresse_maison',
+            'r.address',
             'r.time',
             'r.date',
             'r.created_at as reservation_created_at',
             's.name as serviceName'
         )
-        ->from('reservations as r') // Alias for reservations table
+        ->from('reservations as r')
         ->join('clients as c', 'r.client_id', '=', 'c.id')
         ->join('service_providers as sp', 'r.serviceprovider_id', '=', 'sp.id')
         ->join('users as u', 'sp.user_id', '=', 'u.id')
@@ -128,13 +104,12 @@ class SproviderDashboardComponent extends Component
         $reservationDetails->provider_name,
         $reservationDetails->provider_email,
         $reservationDetails->phone,
-        $reservationDetails->adresse_maison,
+        $reservationDetails->address,
         $reservationDetails->time,
         $reservationDetails->date,
         $reservationDetails->reservation_created_date,
         $reservationDetails->reservation_created_time,
         $reservationDetails->serviceName));
-
 
     }
     public function rejeter($reservationId, $prestataireId)
@@ -143,35 +118,23 @@ class SproviderDashboardComponent extends Component
         $prestataire->reservationsRejetees()->attach($reservationId);
         $this->initialize($this->userId);
         
->>>>>>> 140e004676f533b88c78901482071f2c9e727b3a
     }
 
     private function initialize($id)
-{
+    {
     $this->sprovider_id = ServiceProvider::where('user_id',  $id)->value('id');
 
         $this->categorie = ServiceProvider::where('id', $this->sprovider_id)->value('service_category_id');
 
-<<<<<<< HEAD
-        
-           $this->reservations = Reservation::select('clients.name', 'clients.email', 'clients.phone','reservations.address', 'reservations.date', 'reservations.time', 'reservations.id','services.name as servicName')
-            ->join('clients', 'reservations.client_id', '=', 'clients.id')
-            ->join('services', 'reservations.service_id', '=', 'services.id')
-            ->join('service_categories', 'services.service_category_id', '=', 'service_categories.id')
-            ->join('service_providers', 'service_categories.id', '=', 'service_providers.service_category_id')
-            ->where('service_categories.id', $this->categorie)
-            ->where('reservations.status', 'en attent')
-            ->get();
-=======
 
-        $this->reservations = Reservation::select('clients.name', 'reservations.adresse_maison', 'clients.email', 'clients.phone', 'reservations.date', 'reservations.time', 'reservations.id',
-        'services.name as servicName')
+        $this->reservations = Reservation::select('clients.name', 'reservations.address', 'clients.email', 'clients.phone', 'reservations.date', 'reservations.time', 'reservations.id',
+        'services.name as serviceName')
          ->join('clients', 'reservations.client_id', '=', 'clients.id')
          ->join('services', 'reservations.service_id', '=', 'services.id')
          ->join('service_categories', 'services.service_category_id', '=', 'service_categories.id')
          ->where('service_categories.id', $this->categorie)
          ->where('reservations.status', 'en attent')
-         ->where('reservations.ville', $this->city)
+         ->where('reservations.city', $this->city)
          ->whereNotIn('reservations.id', function($query){
              $query->select('reservation_id')
                    ->from('prestataire_reservation_rejetee')
@@ -179,12 +142,11 @@ class SproviderDashboardComponent extends Component
          })
         ->get();
 
->>>>>>> 140e004676f533b88c78901482071f2c9e727b3a
-}
+    }
     
 
     public function render()
     {
-        return view('livewire.sprovider.sprovider-dashboard-component', ['reservations' => $this->reservations,'city' =>$this->city,'reservationDetails'=>$this->reservationDetails ])->layout('layouts.base');
+        return view('livewire.sprovider.sprovider-dashboard-component')->layout('layouts.SVPdashboardLayout');
     }
 }

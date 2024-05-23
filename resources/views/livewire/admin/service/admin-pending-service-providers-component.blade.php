@@ -65,17 +65,23 @@
                     </tr>
                 </thead>
                 <tbody class="text-black">
-                    @foreach ($PendingSProviders as $PendingSProvider)
-                        <tr onclick="window.location.href='{{ route('admin.Pending_service_provider.details', ['PendingSprovider_id' => $PendingSProvider->id]) }}'">
-                            <td>{{ $PendingSProvider->user->name }}</td>
-                            <td>{{ $PendingSProvider->user->email }}</td>
-                            <td>{{ $PendingSProvider->user->phone }}</td>
-                            <td>{{ $PendingSProvider->user->city }}</td>
-                            <td>{{ $PendingSProvider->category->name }}</td>
-                            <td>{{ $PendingSProvider->user->address }}</td>
-                            <td class="view-details">View Details</td>
+                    @if($PendingSProviders->count() > 0)
+                        @foreach ($PendingSProviders as $PendingSProvider)
+                            <tr onclick="window.location.href='{{ route('admin.Pending_service_provider.details', ['PendingSprovider_id' => $PendingSProvider->id]) }}'">
+                                <td>{{ $PendingSProvider->user->name }}</td>
+                                <td>{{ $PendingSProvider->user->email }}</td>
+                                <td>{{ $PendingSProvider->user->phone }}</td>
+                                <td>{{ $PendingSProvider->user->city }}</td>
+                                <td>{{ $PendingSProvider->category->name }}</td>
+                                <td>{{ $PendingSProvider->user->address }}</td>
+                                <td class="view-details">View Details</td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="9" class="text-center" style="color:red;"><strong>Aucun prestataire disponible.</strong></td>
                         </tr>
-                    @endforeach
+                    @endif
                 </tbody>
             </table>
         </div>

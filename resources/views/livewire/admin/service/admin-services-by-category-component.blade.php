@@ -36,26 +36,32 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($services as $service)
+                                            @if($services->count() > 0)
+                                                @foreach ($services as $service)
+                                                    <tr>
+                                                        <td><img src="{{ asset('images/services/thumbnails') }}/{{ $service->thumbnail }}" alt="{{ $service->name }}" width="60" /></td>
+                                                        <td>{{ $service->name }}</td>
+                                                        <td>{{ $service->price }}</td>
+                                                        <td>
+                                                            @if($service->status)
+                                                                Active
+                                                            @else
+                                                                Inactive
+                                                            @endif
+                                                        </td>
+                                                        <td>{{ $service->category->name }}</td>
+                                                        <td>{{ $service->created_at }}</td>
+                                                        <td>
+                                                            <a href="{{ route('admin.edit_service', ['service_slug' => $service->slug]) }}"><i class="fa fa-edit fa-2x text-info"></i></a>
+                                                            <a href="#"  wire:click.prevent="deleteConfirmation({{$service->id}})" style="margin-left: 10px"><i class="fa fa-times fa-2x text-danger"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @else
                                                 <tr>
-                                                    <td><img src="{{ asset('images/services/thumbnails') }}/{{ $service->thumbnail }}" alt="{{ $service->name }}" width="60" /></td>
-                                                    <td>{{ $service->name }}</td>
-                                                    <td>{{ $service->price }}</td>
-                                                    <td>
-                                                        @if($service->status)
-                                                            Active
-                                                        @else
-                                                            Inactive
-                                                        @endif
-                                                    </td>
-                                                    <td>{{ $service->category->name }}</td>
-                                                    <td>{{ $service->created_at }}</td>
-                                                    <td>
-                                                        <a href="{{ route('admin.edit_service', ['service_slug' => $service->slug]) }}"><i class="fa fa-edit fa-2x text-info"></i></a>
-                                                        <a href="#"  wire:click.prevent="deleteConfirmation({{$service->id}})" style="margin-left: 10px"><i class="fa fa-times fa-2x text-danger"></i></a>
-                                                    </td>
+                                                    <td colspan="9" class="text-center" style="color:red;"><strong>Aucun service disponible.</strong></td>
                                                 </tr>
-                                            @endforeach
+                                            @endif
                                         </tbody>
                                     </table>
                                     {{ $services->links() }}

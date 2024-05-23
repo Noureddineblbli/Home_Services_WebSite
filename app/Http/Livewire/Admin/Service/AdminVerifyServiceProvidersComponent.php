@@ -17,26 +17,68 @@ class AdminVerifyServiceProvidersComponent extends Component
         
     }
 
-    public function verifyServiceProvider($id)
+    protected $listeners = [
+        'acceptConfirmed' => 'acceptServiceProvider',
+        'rejectConfirmed' => 'rejectServiceProvider'
+    ];
+
+    public function acceptConfirmation($id) {
+        $this->PendingSproviderId= $id;
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'title' => 'Êtes-vous sûr?',
+            'text' => "Vous souhaitez accepter ce prestataire!",
+            'icon' => 'warning',
+            'confirmButtonText' => 'Oui!',
+            'cancelButtonText' => 'Non, annulez !',
+            'confirmButtonColor' => '#3085d6',
+            'cancelButtonColor' => '#d33',
+            'action' => 'accept'
+        ]);
+        
+    }
+
+    public function rejectConfirmation($id) {
+        $this->PendingSproviderId= $id;
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'title' => 'Êtes-vous sûr?',
+            'text' => "Vous souhaitez rejeter ce prestataire!",
+            'icon' => 'warning',
+            'confirmButtonText' => 'Oui!',
+            'cancelButtonText' => 'Non, annulez !',
+            'confirmButtonColor' => '#3085d6',
+            'cancelButtonColor' => '#d33',
+            'action' => 'reject'
+        ]);
+        
+    }
+
+    public function acceptServiceProvider()
     {
-        $provider = ServiceProvider::findOrFail($id);
+        $provider = ServiceProvider::findOrFail($this->PendingSproviderId);
         $provider->verified_by_admin = 1;
         $provider->save();
 
         // Send verification email
         Mail::to($provider->user->email)->send(new ServiceProviderVerifiedMail($provider));
 
-        return redirect()->route('admin.service_providers.pending');
+        $this->dispatchBrowserEvent('swal:response', [
+            'title' => 'Accepté!',
+            'text' => 'Le prestataire a été accepté.',
+            'icon' => 'success',
+            'redirectTo' => route('admin.service_providers.pending'), // Specify the redirection URL
+        ]);
+        
        
     }
 
-    public function rejectServiceProvider($id)
+    public function rejectServiceProvider()
     {
-        $provider = ServiceProvider::findOrFail($id);
+        $provider = ServiceProvider::findOrFail($this->PendingSproviderId);
         
         Mail::to($provider->user->email)->send(new ServiceProviderRejectedMail($provider));
 
         $provider->user->delete();
+
         return redirect()->route('admin.service_providers.pending');
 
     }

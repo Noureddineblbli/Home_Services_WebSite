@@ -7,7 +7,6 @@ use App\Http\Livewire\ContactComponent;
 use App\Http\Controllers\SearchController;
 use App\Http\Livewire\Sprovider\HistoryComponent;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
-use App\Http\Livewire\Service\ChangeLocationComponent;
 use App\Http\Livewire\Service\ServiceDetailsComponent;
 use App\Http\Livewire\Customer\ReservationFormComponent;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -30,10 +29,7 @@ use App\Http\Livewire\Admin\Service\AdminAddServiceCategoryComponent;
 use App\Http\Livewire\Admin\Service\AdminEditServiceCategoryComponent;
 use App\Http\Livewire\Admin\Service\AdminServiceProvidersDetailsComponent;
 use App\Http\Livewire\Admin\Service\AdminVerifyServiceProvidersComponent;
-<<<<<<< HEAD
-=======
 use App\Http\Livewire\Admin\Service\AdminServicesByCategoryComponent;
->>>>>>> 140e004676f533b88c78901482071f2c9e727b3a
 use App\Http\Livewire\Admin\Service\AdminPendingServiceProvidersComponent;
 
 
@@ -54,11 +50,15 @@ use App\Http\Livewire\Admin\Service\AdminPendingServiceProvidersComponent;
 
 Route::get('/', HomeComponent::class)->name('home');
 
-Route::get('/homeAuth', HomeComponent::class)->name('homeAuth')->middleware(['verified','auth','authsprovider']);
+Route::get('/homeAuth', HomeComponent::class)->name('homeAuth')->middleware(['verified','auth','authsprovider','guest']);
 
 Route::get('/waiting-page', function () {
     return view('waiting_page');
 })->name('waiting_page');
+
+Route::get('/account_Disabled', function () {
+    return view('account_Disabled');
+})->name('account_Disabled');
 
 Route::get('/service-category', ServiceCategoriesComponent::class)->name('home.service_categories');
 
@@ -69,8 +69,6 @@ Route::get('/service/{service_slug}', ServiceDetailsComponent::class)->name('hom
 Route::get('/autocomplete', [SearchController::class, 'autocomplete'])->name('autocomplete');
 
 Route::post('/search', [SearchController::class, 'searchService'])->name('searchService');
-
-Route::get('/change-location', ChangeLocationComponent::class)->name('home.change_location');
 
 Route::get('/contact-us', ContactComponent::class)->name('home.contact');
 

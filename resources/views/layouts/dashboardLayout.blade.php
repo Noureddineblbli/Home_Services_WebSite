@@ -66,6 +66,12 @@
             </a>
           </li>
           <li class="sidebar-list-item">
+            <a href="{{ route('admin.historique') }}">
+                <span class="material-icons-outlined">history</span> Historique des Réservations
+            </a>
+        </li>
+        
+          <li class="sidebar-list-item">
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none">
                     @csrf

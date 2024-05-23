@@ -32,6 +32,8 @@
                                                 <th>Phone</th>
                                                 <th>Message</th>
                                                 <th>Created At</th>
+                                                <th>Action</th>
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -43,6 +45,9 @@
                                                     <td>{{ $contact->phone }}</td>
                                                     <td>{{ $contact->message }}</td>
                                                     <td>{{ $contact->created_at }}</td>
+                                                    <td><button wire:click="answerMessage({{ $contact->id }})" class="btn btn-success">Repondre</button>
+
+
                                                 </tr>
                                             @endforeach
                                         </tbody>

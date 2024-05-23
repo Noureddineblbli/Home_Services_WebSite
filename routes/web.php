@@ -24,15 +24,17 @@ use App\Http\Livewire\Sprovider\SproviderDashboardComponent;
 use App\Http\Livewire\Admin\Service\AdminAddServiceComponent;
 use App\Http\Livewire\Admin\Service\AdminEditServiceComponent;
 use App\Http\Livewire\Sprovider\EditSproviderProfileComponent;
+use App\Http\Livewire\Admin\Service\AdminContactAnswerComponent;
+use App\Http\Livewire\Admin\Service\ReservationDetailsComponent;
+use App\Http\Livewire\Admin\Service\ReservationHistoryComponent;
 use App\Http\Livewire\Admin\Service\AdminServiceCategoryComponent;
 use App\Http\Livewire\Admin\Service\AdminServiceProvidersComponent;
 use App\Http\Livewire\Admin\Service\AdminAddServiceCategoryComponent;
-use App\Http\Livewire\Admin\Service\AdminEditServiceCategoryComponent;
-use App\Http\Livewire\Admin\Service\AdminServiceProvidersDetailsComponent;
-use App\Http\Livewire\Admin\Service\AdminVerifyServiceProvidersComponent;
 use App\Http\Livewire\Admin\Service\AdminServicesByCategoryComponent;
+use App\Http\Livewire\Admin\Service\AdminEditServiceCategoryComponent;
+use App\Http\Livewire\Admin\Service\AdminVerifyServiceProvidersComponent;
 use App\Http\Livewire\Admin\Service\AdminPendingServiceProvidersComponent;
-
+use App\Http\Livewire\Admin\Service\AdminServiceProvidersDetailsComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +95,11 @@ Route::middleware(['verified','auth:sanctum', config('jetstream.auth_session'), 
     Route::get('/admin/slide/edit/{slide_id}', AdminEditSlideComponent::class)->name('admin.edit_slide');
 
     Route::get('/admin/contacts', AdminContactComponent::class)->name('admin.contacts');
+    Route::get('/admin/historique', ReservationHistoryComponent::class)->name('admin.historique');
+    Route::get('/reservations/{id}', ReservationDetailsComponent::class)->name('reservations.show');
+    Route::get('/admin/contacts/answer/{id}', AdminContactAnswerComponent::class)->name('contact.answer');
+
+
 
     Route::get('/admin/service-providers', AdminServiceProvidersComponent::class)->name('admin.service_providers');
     Route::get('/admin/service-providers/pending', AdminPendingServiceProvidersComponent::class)->name('admin.service_providers.pending');

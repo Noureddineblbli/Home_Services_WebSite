@@ -197,25 +197,4 @@ class ReservationFormComponent extends Component
         ];
         return view('livewire.customer.reservation-form-component',['timeSlots'=>$timeSlots,'cities' => $cities,'service','serviceProviders'=> $this->serviceProviders])->layout('layouts.base');
     }
-
-
-
-   
-
-    public  function reservation()
-    {
-        return $this->reservation;
-        
-    }
-    public  function client()
-    {
-        return $this->client;
-        
-    }
-
-    public  function Sproviders()
-    {
-        return $this->serviceProviders;
-        
-    }
 }

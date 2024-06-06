@@ -28,7 +28,7 @@
                             @if (Session::has('message'))
                                         <div class="alert alert-success" role="alert">{{ Session::get('message') }}</div>
                                     @endif
-                            <form  wire:submit.prevent="createReservation({{ auth()->user() ? auth()->user()->id : 'null' }})">
+                            <form  wire:submit.prevent="checkServiceProviders({{ auth()->user() ? auth()->user()->id : 'null' }})">
                                 @csrf
                                 <div class="form-group row">
                                     <label for="name" class="col-md-4 col-form-label text-md-right">Nom</label>

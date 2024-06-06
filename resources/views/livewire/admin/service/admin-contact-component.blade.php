@@ -15,7 +15,7 @@
                                 <div class="panel-heading">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            All Contacts
+                                            Tous les contacts
                                         </div>
                                         <div class="col-md-6">
 
@@ -27,11 +27,11 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Phone</th>
+                                                <th>Nom</th>
+                                                <th>E-mail</th>
+                                                <th>Téléphone</th>
                                                 <th>Message</th>
-                                                <th>Created At</th>
+                                                <th>Créé à</th>
                                                 <th>Action</th>
 
                                             </tr>
@@ -46,20 +46,12 @@
                                                         <td>{{ $contact->phone }}</td>
                                                         <td>{{ $contact->message }}</td>
                                                         <td>{{ $contact->created_at }}</td>
+                                                        <td><button wire:click="answerMessage({{ $contact->id }})" class="btn btn-success">Répondre</button>
                                                     </tr>
                                                 @endforeach
                                             @else
                                                 <tr>
                                                     <td colspan="9" class="text-center" style="color:red;"><strong>Aucun contact disponible.</strong></td>
-                                                    <td>{{ $contact->id }}</td>
-                                                    <td>{{ $contact->name }}</td>
-                                                    <td>{{ $contact->email }}</td>
-                                                    <td>{{ $contact->phone }}</td>
-                                                    <td>{{ $contact->message }}</td>
-                                                    <td>{{ $contact->created_at }}</td>
-                                                    <td><button wire:click="answerMessage({{ $contact->id }})" class="btn btn-success">Repondre</button>
-
-
                                                 </tr>
                                             @endif
                                         </tbody>

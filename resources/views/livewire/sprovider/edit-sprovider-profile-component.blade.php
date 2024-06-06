@@ -1,12 +1,12 @@
 <div>
 
-                <h1>Edit Profile</h1>
+                <h1>Modifier le profil</h1>
 
                             <div class="panel panel-default" style="font-weight: 600;">
                                 <div class="panel-heading">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            Edit Profile
+                                            Modifier le profil
                                         </div>
                                         <div class="col-md-6">
                                         </div>
@@ -21,7 +21,7 @@
                                             <form class="form-horizontal" wire:submit.prevent="updateProfile">
                                                 @csrf
                                                 <div class="form-group">
-                                                    <label for="image" class="control-label col-sm-3">Profile Image: </label>
+                                                    <label for="image" class="control-label col-sm-3">Image de profil: </label>
                                                     <div class="col-sm-9">
                                                         <input type="file" class="form-control-file" name="image" wire:model="newimage"/>
                                                         @error('newimage')
@@ -37,7 +37,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="about" class="control-label col-sm-3">About: </label>
+                                                    <label for="about" class="control-label col-sm-3">Description: </label>
                                                     <div class="col-sm-9">
                                                         <textarea class="form-control" name="about" wire:model="about"></textarea>
                                                         @error('about')
@@ -61,7 +61,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="service_category_id" class="control-label col-sm-3">Service Category: </label>
+                                                    <label for="service_category_id" class="control-label col-sm-3">Catégorie de services: </label>
                                                     <div class="col-sm-9">
                                                         <select name="featured" class="form-control" wire:model="service_category_id">
                                                                 @foreach ($scategories as $scategory)
@@ -74,7 +74,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label for="service_location" class="control-label col-sm-3">Service Locations Zipcode/Pincode: </label>
+                                                    <label for="service_location" class="control-label col-sm-3">Adresse: </label>
                                                     <div class="col-sm-9">
                                                         <input type="text" class="form-control" name="service_location" wire:model="service_location"/>
                                                         @error('service_location')
@@ -85,7 +85,7 @@
                                                 <div class="form-group">
                                                     <label for="" class="control-label col-sm-3"></label>
                                                     <div class="col-sm-9">
-                                                        <button type="submit" class="btn btn-success pull-right">Update Profile</button>
+                                                        <button type="submit" class="btn btn-success pull-right">Modifier le profil</button>
                                                     </div>
                                                 </div>
                                             </form>

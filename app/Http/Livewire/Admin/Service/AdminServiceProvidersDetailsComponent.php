@@ -14,8 +14,43 @@ class AdminServiceProvidersDetailsComponent extends Component
         
     }
 
-    public function disableAccount($id){
-        $serviceProvider = ServiceProvider::where('id',$id)->first();
+    protected $listeners = [
+        'acceptConfirmed' => 'inableAccount',
+        'rejectConfirmed' => 'disableAccount'
+    ];
+
+    public function EnableConfirmation($id) {
+        $this->SproviderId= $id;
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'title' => 'Êtes-vous sûr?',
+            'text' => "Vous souhaitez activer ce compte!",
+            'icon' => 'warning',
+            'confirmButtonText' => 'Oui!',
+            'cancelButtonText' => 'Non, annulez !',
+            'confirmButtonColor' => '#3085d6',
+            'cancelButtonColor' => '#d33',
+            'action' => 'accept'
+        ]);
+        
+    }
+
+    public function DisableConfirmation($id) {
+        $this->SproviderId= $id;
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'title' => 'Êtes-vous sûr?',
+            'text' => "Vous souhaitez Désactiver ce compte!",
+            'icon' => 'warning',
+            'confirmButtonText' => 'Oui!',
+            'cancelButtonText' => 'Non, annulez !',
+            'confirmButtonColor' => '#3085d6',
+            'cancelButtonColor' => '#d33',
+            'action' => 'reject'
+        ]);
+        
+    }
+
+    public function disableAccount(){
+        $serviceProvider = ServiceProvider::where('id',$this->SproviderId)->first();
         $serviceProvider->Activation = 0;
         $serviceProvider->save();
 
@@ -26,8 +61,8 @@ class AdminServiceProvidersDetailsComponent extends Component
         ]);
     }
 
-    public function inableAccount($id){
-        $serviceProvider = ServiceProvider::where('id',$id)->first();
+    public function inableAccount(){
+        $serviceProvider = ServiceProvider::where('id',$this->SproviderId)->first();
         $serviceProvider->Activation = 1;
         $serviceProvider->save();
 

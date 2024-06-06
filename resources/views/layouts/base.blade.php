@@ -76,44 +76,104 @@
         {{ $slot }}
         <footer id="footer" class="footer-v1">
             <div class="container">
-                <div class="row visible-md visible-lg">
-                    
+                <div class="row">
                     <div class="col-md-3 col-xs-6 col-sm-6">
                         <h3>CONTACTEZ-NOUS</h3>
-                        <ul class="contact_footer" style="color: aliceblue;">
-                            <li class="location">
-                                <i class="fa fa-map-marker"></i> Bensouda, Fes, Morroco
-                            </li>
-                            <li>
-                                <i class="fa fa-envelope"></i>ahntateridwane@gmail.com
-                            </li>
-                            <li>
-                                <i class="fa fa-headphones"></i>+212-658619374
-                            </li>
+                        <ul class="contact_footer">
+                            <li class="location"><i class="fa fa-map-marker"></i> Bensouda, Fes, Morroco</li>
+                            <li><i class="fa fa-envelope"></i> ahntateridwane@gmail.com</li>
+                            <li><i class="fa fa-headphones"></i> +212-658619374</li>
                         </ul>
-                        <h3 style="margin-top: 10px">SUIVEZ-NOUS</h3>
+                    </div>
+                    <div class="col-md-3 col-xs-6 col-sm-6">
+                        <h3>LIENS RAPIDES</h3>
+                        <ul class="quick-links">
+                            <li><a href="{{ route('home.service_categories') }}">Catégories de services</a></li>
+                            <li><a href="{{ route('register') }}">S'inscrire</a></li>
+                            <li><a href="{{ route('login') }}">Se connecter</a></li>
+                            
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-xs-6 col-sm-6">
+                        <h3>Catégories de services</h3>
+                        <ul class="customer-support">
+                            <li><a href="{{ route('home.services_by_category', ['category_slug' => "Climatisation"]) }}">Climatisation</a></li>
+                            <li><a href="{{ route('home.services_by_category', ['category_slug' => "Plomberie"]) }}">Plomberie</a></li>
+                            <li><a href="{{ route('home.services_by_category', ['category_slug' => "électrique"]) }}">électrique</a></li>
+                            
+                        </ul>
+                    </div>
+                    <div class="col-md-3 col-xs-6 col-sm-6">
+                        <h3>SUIVEZ-NOUS</h3>
                         <ul class="social">
-                            <li class="facebook"><span><i class="fa fa-facebook"></i></span><a href="#"></a></li>
-                            <li class="github"><span><i class="fa fa-github"></i></span><a href="#"></a></li>
-                            <li class="github"><span><i class="fa fa-instagram"></i></span><a href="#"></a></li>
+                            <li><a href="#"><i class="fa fa-facebook"></i> Facebook</a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i> Instagram</a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i> LinkedIn</a></li>
                         </ul>
                     </div>
                 </div>
-            </div>
-            <div class="footer-down">
-                <div class="container">
+                <div class="footer-down">
                     <div class="row">
-                        <div class="col-md-6">
-                            <ul class="nav-footer">
-                                <li><a href="{{ route('home.contact') }}">CONTACTEZ-NOUS</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <p class="text-xs-center crtext">&copy; 2024 ServiceNet. Tous droits réservés.</p>
+                        <div class="text-center">
+                            <p>&copy; 2024 ServiceNet. Tous droits réservés.</p>
                         </div>
                     </div>
                 </div>
             </div>
+            <style>
+                .footer-v1 {
+                    background-color: #333;
+                    color: #fff;
+                    padding: 20px 0;
+                }
+                .footer-v1 h3 {
+                    margin-top: 0;
+                    margin-bottom: 20px;
+                    color: #fff;
+                }
+                .footer-v1 ul {
+                    list-style: none;
+                    padding: 0;
+                }
+                .footer-v1 ul li {
+                    margin-bottom: 10px;
+                }
+                .footer-v1 ul li a {
+                    color: #fff;
+                    text-decoration: none;
+                }
+                .footer-v1 ul li a:hover {
+                    text-decoration: underline;
+                }
+                .footer-v1 .contact_footer i, .footer-v1 .social i {
+                    margin-right: 10px;
+                }
+                .footer-v1 .social li {
+                    display: inline-block;
+                    margin-right: 10px;
+                }
+                .footer-v1 .footer-down {
+                    border-top: 1px solid #444;
+                    padding-top: 10px;
+                    margin-top: 20px;
+                }
+                .footer-v1 .footer-down .nav-footer {
+                    list-style: none;
+                    padding: 0;
+                }
+                .footer-v1 .footer-down .nav-footer li {
+                    display: inline;
+                    margin-right: 15px;
+                }
+                .footer-v1 .footer-down .nav-footer li a {
+                    color: #fff;
+                    text-decoration: none;
+                }
+                .footer-v1 .footer-down .nav-footer li a:hover {
+                    text-decoration: underline;
+                }
+            </style>
         </footer>
     </div>
     <script type="text/javascript" src="{{ asset('assets/js/nav/jquery.sticky.js') }}"></script>

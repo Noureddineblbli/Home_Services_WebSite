@@ -16,7 +16,15 @@ class AdminSliderComponent extends Component
 
     public function deleteConfirmation($id) {
         $this->delete_id= $id;
-        $this->dispatchBrowserEvent('show-confirmation');
+        $this->dispatchBrowserEvent('swal:confirm', [
+            'title' => 'Êtes-vous sûr de vouloir supprimer cette diapositive?',
+            'text' => "",
+            'icon' => 'warning',
+            'confirmButtonText' => 'Oui, supprimez-le !',
+            'cancelButtonText' => 'Non, annulez !',
+            'confirmButtonColor' => '#3085d6',
+            'cancelButtonColor' => '#d33'
+        ]);
         
     }
 

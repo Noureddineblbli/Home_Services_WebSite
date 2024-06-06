@@ -38,7 +38,7 @@ class ContactComponent extends Component
         $contact->message = $this->message;
         $contact->save();
 
-        session()->flash('message', 'Your message has been send successfully!');
+        session()->flash('message', 'Votre message a été envoyé avec succés!');
     }
 
     public function render()

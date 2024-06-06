@@ -42,14 +42,10 @@ class AdminEditServiceComponent extends Component
         $this->tagline = $service->tagline;
         $this->service_category_id = $service->service_category_id;
         $this->price = $service->price;
-        $this->discount = $service->discount;
-        $this->discount_type = $service->discount_type;
         $this->featured = $service->featured;
         $this->image = $service->image;
         $this->thumbnail = $service->thumbnail;
         $this->description = $service->description;
-        $this->inclusion = str_replace("|", "\n", $service->inclusion);
-        $this->exclusion = str_replace("|", "\n", $service->exclusion);
     }
 
     public function generateSlug()
@@ -66,8 +62,6 @@ class AdminEditServiceComponent extends Component
             'service_category_id' => 'required',
             'price' => 'required',
             'description' => 'required',
-            'inclusion' => 'required',
-            'exclusion' => 'required'
         ]);
 
         if ($this->newimage) {
@@ -92,8 +86,6 @@ class AdminEditServiceComponent extends Component
             'service_category_id' => 'required',
             'price' => 'required',
             'description' => 'required',
-            'inclusion' => 'required',
-            'exclusion' => 'required'
         ]);
 
         if ($this->newimage) {
@@ -114,12 +106,8 @@ class AdminEditServiceComponent extends Component
         $service->tagline = $this->tagline;
         $service->service_category_id = $this->service_category_id;
         $service->price = $this->price;
-        $service->discount = $this->discount;
-        $service->discount_type = $this->discount_type;
         $service->featured = $this->featured;
         $service->description = $this->description;
-        $service->exclusion = str_replace("\n", '|', trim($this->exclusion));
-        $service->inclusion = str_replace("\n", '|', trim($this->inclusion));
 
         if ($this->newthumbnail) {
             unlink('images/services/thumbnails' . '/' . $service->thumbnail);
@@ -136,7 +124,7 @@ class AdminEditServiceComponent extends Component
         }
 
         $service->save();
-        session()->flash('message', 'Service has been updated successfully!');
+        session()->flash('message', 'Le service a été modifié avec succès !');
     }
 
     public function render()

@@ -1,15 +1,15 @@
 <div>
 
-                <h1>Edit Service Category</h1>
+                <h1>Modifier la catégorie de service</h1>
 
                             <div class="panel panel-default" style="font-weight: 600;">
                                 <div class="panel-heading">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            Edit Service Category
+                                            Modifier la catégorie de service
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="{{ route('admin.service_categories') }}" class="btn btn-info pull-right">All Service Categories</a>
+                                            <a href="{{ route('admin.service_categories') }}" class="btn btn-info pull-right">Toutes les catégories de services</a>
                                         </div>
                                     </div>
                                 </div>
@@ -20,7 +20,7 @@
                                     <form class="form-horizontal" wire:submit.prevent="updateServiceCategory">
                                         @csrf
                                         <div class="form-group">
-                                            <label for="name" class="control-label col-sm-2">Category Name: </label>
+                                            <label for="name" class="control-label col-sm-2">Nom de catégorie: </label>
                                             <div class="col-sm-7">
                                                 <input type="text" class="form-control" name="name" wire:model="name" wire:keyup="generateSlug"/>
                                                 @error('name')
@@ -28,7 +28,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" style="display: none;">
                                             <label for="slug" class="control-label col-sm-2">Category Slug: </label>
                                             <div class="col-sm-7">
                                                 <input type="text" class="form-control" name="slug" wire:model="slug"/>
@@ -38,7 +38,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="image" class="control-label col-sm-2">Category Image: </label>
+                                            <label for="image" class="control-label col-sm-2">Image de la catégorie: </label>
                                             <div class="col-sm-7">
                                                 <input type="file" class="form-control-file" name="image" wire:model="newimage"/>
                                                 @error('newimage')
@@ -53,22 +53,21 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="featured" class="control-label col-sm-2">Featured: </label>
+                                            <label for="featured" class="control-label col-sm-2">Mis en avant: </label>
                                             <div class="col-sm-7">
                                                 <select name="featured" class="form-control" wire:model="featured">
-
-                                                    <option value="">Select Featured</option>
-                                                    <option value="0">No</option>
-                                                    <option value="1">Yes</option>
-
+                                                    <option value="">Sélectionner</option>
+                                                    <option value="0">Non</option>
+                                                    <option value="1">Oui</option>
                                                 </select>
                                             </div>
                                         </div>
+                                        
 
                                         <div class="form-group">
                                             <label for="" class="control-label col-sm-3"></label>
                                             <div class="col-sm-9">
-                                                <button type="submit" class="btn btn-success pull-right">Update Category</button>
+                                                <button type="submit" class="btn btn-success pull-right">Modifier la catégorie</button>
                                             </div>
                                         </div>
                                     </form>

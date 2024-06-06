@@ -63,7 +63,7 @@ class AdminEditSlideComponent extends Component
         $slide->status = $this->status;
         $slide->save();
 
-        session()->flash('message', 'Slide has been updated successfully!');
+        session()->flash('message', 'Le diapositive a été modifié avec succès !');
     }
 
     public function render()

@@ -14,7 +14,7 @@
         .email-container {
             max-width: 600px;
             margin: 0 auto;
-            background-color: #ED9455;
+            background-color: #FFEC9E;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -43,7 +43,7 @@
             display: inline-block;
             margin-top: 20px;
             padding: 10px 20px;
-            background-color: #FFEC9E;
+            background-color: #ED9455;
             color: #252C2E;
             text-decoration: none;
             border-radius: 5px;

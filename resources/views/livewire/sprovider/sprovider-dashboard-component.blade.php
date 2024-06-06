@@ -9,9 +9,9 @@
     </style>
     <h1>
         @if($showHistory)
-            Reservation History
+            Historique des réservations
         @else
-            Verify Your Offers
+            Vérifiez vos offres
         @endif
     </h1>
     <div class="panel panel-default" style="font-weight: 600;">
@@ -19,17 +19,17 @@
             <div class="row">
                 <div class="col-md-6">
                     @if($showHistory)
-                        Reservation History
+                        Historique des réservations
                     @else
-                        Pending reservations
+                        Réservations en attente
                     @endif
                 </div>
                 <div class="col-md-6">
                     <button wire:click="toggleShowHistory()" class="btn btn-info pull-right">
                         @if($showHistory)
-                            Show Pending Reservations
+                            Afficher les réservations en attente
                         @else
-                            Show Reservation History
+                            Afficher l'historique des réservations
                         @endif
                     </button>
                 </div>
@@ -42,13 +42,13 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Service Name</th>
-                        <th>Client's Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                        <th>Reservation Date</th>
-                        <th>Reservation Hour</th>
+                        <th>Nom du service</th>
+                        <th>Nom du client</th>
+                        <th>E-mail</th>
+                        <th>Téléphone</th>
+                        <th>Adresse</th>
+                        <th>Date de réservation</th>
+                        <th>Heure de réservation</th>
                         @if(!$showHistory)
                             <th>Action</th>
                         @endif
@@ -68,8 +68,8 @@
                                 <td>{{ $reservation->time }}</td>
                                 @if(!$showHistory)
                                     <td>
-                                        <button wire:click="verifyReservation({{ $reservation->id}})">Verify</button>
-                                        <button wire:click="rejeter({{ $reservation->id }}, {{ $sprovider_id }})" style="margin-left: 10px"><i class="fa fa-times fa-2x text-danger"></i></button>
+                                        <button class="btn btn-success btn-sm" wire:click="AcceptReservation({{ $reservation->id }})">Accepter</button>
+                                        <button class="btn btn-danger btn-sm" wire:click="RejectReservation({{ $reservation->id }}, {{ $sprovider_id }})" style="margin: 5px">Rejeter</button>
                                     </td>
                                 @endif
                             </tr>

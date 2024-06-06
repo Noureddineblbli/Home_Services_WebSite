@@ -11,7 +11,8 @@ class AdminServicesComponent extends Component
 {
     use WithPagination;
 
-    public $categoryFilter;
+    public $categoryFilter = '';
+    public $searchTerm = '';
     public $delete_id;
 
     protected $listeners = ['ActionConfirmed' => 'deleteService'];
@@ -55,9 +56,14 @@ class AdminServicesComponent extends Component
     public function render()
     {
         $categories = ServiceCategory::all();
-        $services = Service::when($this->categoryFilter, function ($query, $categoryId) {
-            return $query->where('service_category_id', $categoryId);
-        })->paginate(10);
+        $services = Service::query()
+            ->when($this->categoryFilter, function ($query) {
+                $query->where('service_category_id', $this->categoryFilter);
+            })
+            ->where(function($query) {
+                $query->where('name', 'like', '%' . $this->searchTerm . '%');
+            })
+            ->paginate(10);
         return view('livewire.admin.service.admin-services-component', ['services' => $services,'categories'=>$categories])->layout('layouts.dashboardLayout');
     }
 }

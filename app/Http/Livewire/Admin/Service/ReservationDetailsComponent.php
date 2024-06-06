@@ -25,7 +25,7 @@ class ReservationDetailsComponent extends Component
         // Fetch reservation information
         $reservationInfo = DB::table('reservations as r')
             ->join('services as s', 'r.service_id', '=', 's.id')
-            ->select('s.name as service_name', 'r.date', 'r.time', 'r.created_at', 'r.status', 'r.adresse_maison', 'r.ville')
+            ->select('s.name as service_name', 'r.date', 'r.time', 'r.created_at', 'r.status', 'r.address', 'r.city')
             ->where('r.id', $this->reservationId)
             ->first();
     

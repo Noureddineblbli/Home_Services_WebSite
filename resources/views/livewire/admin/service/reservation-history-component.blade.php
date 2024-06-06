@@ -6,6 +6,30 @@
         nav .hidden{
             display: block !important;
         }
+        .table-bordered tbody tr {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .table-bordered tbody tr:hover {
+            background-color: #f0f0f0; /* Change background color on hover */
+        }
+
+        .table-bordered tbody tr .view-details {
+            display: none; /* Hide "view details" message by default */
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .table-bordered tbody tr:hover .view-details {
+            display: block; 
+        }
     </style>
 
                 <h1>Historique des Réservations</h1>
@@ -32,21 +56,20 @@
                                                 <th>L'heure de Réservations</th>
                                                 <th>Date de Création</th>
                                                 <th>status</th>
-                                                <th>Details</th>
+                                                
 
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($reservations as $reservation) 
-                                                <tr>
+                                            <tr wire:click="showReservationDetails({{ $reservation->id }})">
                                                     <td>{{$reservation->service_name}}</td>
                                                     <td>{{$reservation->client_name}}</td>
                                                     <td>{{$reservation->date}}</td>
                                                     <td>{{$reservation->time}}</td>
                                                     <td>{{$reservation->created_at}}</td>
                                                     <td>{{$reservation->status}}</td>
-                                                    <td><button wire:click="showReservationDetails({{ $reservation->id }})" class="btn btn-success">Voir Détails</button>
-                                                    </td>                                           
+                                                    <td class="view-details">Voir détails</td>                                          
                                              @endforeach
                                         </tbody>
                                     </table>

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Tableau de Bord Admin</title>
 
     <!-- Montserrat Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -42,7 +42,7 @@
           </li>
           <li class="sidebar-list-item">
             <a href="{{ route('admin.service_categories') }}">
-            <span class="material-icons-outlined">category</span> Service categorie
+            <span class="material-icons-outlined">category</span> Catégories de Services
             </a>
           </li>
           <li class="sidebar-list-item">
@@ -52,12 +52,12 @@
           </li>
           <li class="sidebar-list-item">
             <a href="{{ route('admin.service_providers') }}" >
-            <span class="material-icons-outlined">group</span> Service Providers
+            <span class="material-icons-outlined">group</span> Fournisseurs de Services
             </a>
           </li>
           <li class="sidebar-list-item">
             <a href="{{ route('admin.slider') }}" >
-            <span class="material-icons-outlined">slideshow</span> Sliders
+            <span class="material-icons-outlined">slideshow</span> Diapositives
             </a>
           </li>
           <li class="sidebar-list-item">
@@ -69,14 +69,13 @@
             <a href="{{ route('admin.historique') }}">
                 <span class="material-icons-outlined">history</span> Historique des Réservations
             </a>
-        </li>
-        
+          </li>
           <li class="sidebar-list-item">
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none">
                     @csrf
                 </form>
-                <span class="material-icons-outlined">exit_to_app</span> Logout
+                <span class="material-icons-outlined">exit_to_app</span> Déconnexion
             </a>
           </li>
         </ul>
@@ -85,7 +84,7 @@
 
       <!-- Main -->
       <main class="main-container">
-        {{ $slot}}
+        {{ $slot }}
       </main>
       <!-- End Main -->
 

@@ -75,7 +75,7 @@ class AdminEditServiceCategoryComponent extends Component
         $scategory->featured = $this->featured;
 
         $scategory->save();
-        session()->flash('message', 'Category has been updated successfully!');
+        session()->flash('message', 'La catégorie a été modifiée avec succès !');
     }
 
     public function render()

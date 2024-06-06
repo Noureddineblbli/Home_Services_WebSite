@@ -14,6 +14,8 @@ use App\Http\Livewire\Sprovider\SproviderDashboardComponent;
 use App\Models\Service;
 use Illuminate\Support\Facades\Auth;
 
+use function Termwind\render;
+
 class ReservationFormComponent extends Component
 {
     public $client_id;
@@ -57,6 +59,27 @@ class ReservationFormComponent extends Component
             'time' => 'required|date_format:H:i',
         ]);
     }
+
+    public function checkServiceProviders($user_id)
+    {
+        $this->categoryId = Service::where('id', $this->service_id)->value('service_category_id');
+        $this->serviceProviders = User::select('users.name', 'users.email')
+            ->join('service_providers as sp', 'users.id', '=', 'sp.user_id')
+            ->where('sp.service_category_id', $this->categoryId)
+            ->where('users.city', $this->reservation_city)
+            ->get();
+        if ($this->serviceProviders->count() == 0) {
+            $this->dispatchBrowserEvent('swal:reservationCreated', [
+                'title' => 'Réservation échouée!',
+                'text' => 'Nous sommes désolés, il n\'y a actuellement aucun prestataire de service disponible pour ce service. Veuillez consulter les autres services disponibles sur notre site.',
+                'icon' => 'error',
+            ]);
+        }else{
+            $this->createReservation($user_id);
+        }
+
+    }
+
 
     public function createReservation($user_id)
     {
@@ -120,9 +143,9 @@ class ReservationFormComponent extends Component
             'title' => 'Réservation créée avec succès!',
             'text' => 'Votre réservation a été créée avec succès. Vous devez attendre qu\'un prestataire de services accepte votre réservation. Vous serez informé par email lorsque cela se produira.',
             'icon' => 'success',
-        ]);
 
-       
+        ]);
+   
     }
 
     public function notifyServiceProviders(){

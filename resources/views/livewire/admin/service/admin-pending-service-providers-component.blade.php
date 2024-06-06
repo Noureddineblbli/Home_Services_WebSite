@@ -1,5 +1,5 @@
 <div>
-<style>
+    <style>
         nav svg {
             height: 20px;
         }
@@ -14,11 +14,11 @@
         }
 
         .table-bordered tbody tr:hover {
-            background-color: #f0f0f0; /* Change background color on hover */
+            background-color: #f0f0f0; /* Changer la couleur de fond au survol */
         }
 
         .table-bordered tbody tr .view-details {
-            display: none; /* Hide "view details" message by default */
+            display: none; /* Masquer le message "voir les détails" par défaut */
             position: absolute;
             left: 50%;
             top: 50%;
@@ -30,18 +30,17 @@
         }
 
         .table-bordered tbody tr:hover .view-details {
-            display: block; /* Display "view details" message on row hover */
+            display: block; /* Afficher le message "voir les détails" au survol de la ligne */
         }
     </style>
 
-
-    <h1>Pending Service Providers</h1>
+    <h1>Prestataires de Services en Attente</h1>
 
     <div class="panel panel-default" style="font-weight: 600;">
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-6">
-                    Pending Service Providers
+                    Prestataires de Services en Attente
                 </div>
                 <div class="col-md-6">
 
@@ -55,13 +54,12 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Name</th>
+                        <th>Nom</th>
                         <th>Email</th>
-                        <th>Phone</th>
-                        <th>City</th>
-                        <th>Service Category</th>
-                        <th>Service Locations</th>
-                        
+                        <th>Téléphone</th>
+                        <th>Ville</th>
+                        <th>Catégorie de Services</th>
+                        <th>Locations de Services</th>
                     </tr>
                 </thead>
                 <tbody class="text-black">
@@ -74,7 +72,7 @@
                                 <td>{{ $PendingSProvider->user->city }}</td>
                                 <td>{{ $PendingSProvider->category->name }}</td>
                                 <td>{{ $PendingSProvider->user->address }}</td>
-                                <td class="view-details">View Details</td>
+                                <td class="view-details">Voir les Détails</td>
                             </tr>
                         @endforeach
                     @else
@@ -86,6 +84,4 @@
             </table>
         </div>
     </div>
-                        
-
 </div>

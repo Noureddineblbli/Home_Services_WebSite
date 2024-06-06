@@ -7,17 +7,17 @@
                     <li data-transition="slidevertical" data-slotamount="1" data-masterspeed="1000"
                         data-saveperformance="off" data-title="Slide">
                         <img src="{{ asset('images/slider') }}/{{ $slide->image }}" alt="{{ $slide->title }}" data-bgposition="center center"
-                            data-kenburns="on" data-duration="6000" data-ease="Linear.easeNone" data-bgfit="130"
+                            data-kenburns="on" data-duration="6000" data-ease="Linear.easeNone" data-bgfit="110"
                             data-bgfitend="100" data-bgpositionend="right center">
                     </li>
                 @endforeach
-            </ul>
+            </ul>            
             <div class="tp-bannertimer"></div>
         </div>
         <div class="filter-title">
             <div class="title-header">
-                <h2 style="color:#FFEC9E;">RÉSERVEZ UN SERVICE MAINTENANT</h2>
-                <p class="lead">Réservez une prestation à prix très abordable, </p>
+                <h2 style="color:#252C2E;">RÉSERVEZ UN SERVICE MAINTENANT</h2>
+                <p class="lead" style="color:#252C2E;">Réservez une prestation à prix très abordable, </p>
             </div>
             <div class="filter-header">
                 <form id="sform" action="{{ route('searchService') }}" method="post">
@@ -61,7 +61,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="titles">
-                            <h2>ServieNet <span>Choix</span> des Services</h2>
+                            <h2>ServiceNet <span>Choix</span> des Services</h2>
                             
                             <hr class="tall">
                         </div>
@@ -131,7 +131,7 @@
             <div class="container">
                 <div class="row">
                     <div class="titles">
-                        <h2>Services <span>d'électroménager</span></h2>
+                        <h2>Services <span>Récents</span></h2>
                         
                         <hr class="tall">
                     </div>

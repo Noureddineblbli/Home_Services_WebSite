@@ -25,7 +25,14 @@ class ServiceProvider extends Model
     {
         return $this->hasMany(Reservation::class);
     }
-    public function reservationsRejetees() {
+
+    public function reservationsRejetees() 
+    {
         return $this->belongsToMany('App\Models\Reservation', 'prestataire_reservation_rejetee', 'prestataire_id', 'reservation_id');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 }

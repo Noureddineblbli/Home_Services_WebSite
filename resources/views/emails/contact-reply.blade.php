@@ -14,7 +14,7 @@
         .container {
             max-width: 600px;
             margin: 20px auto;
-            background-color: #f0e992;
+            background-color: #FFEC9E;
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -32,15 +32,15 @@
 
         .button {
             display: inline-block;
-            background-color: #007bff;
-            color: #ffffff;
+            background-color: #ED9455;
+            color: #333333;
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
         }
 
         .button:hover {
-            background-color: #0056b3;
+            background-color: #FFBB70;
         }
     </style>
 </head>

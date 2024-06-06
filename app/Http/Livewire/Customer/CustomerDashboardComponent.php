@@ -16,6 +16,7 @@ class CustomerDashboardComponent extends Component
         $this->clientId=client::where('user_id',Auth::user()->id)->value('id');
         $this->reservations=Reservation::all()->where('client_id',$this->clientId);
     }
+    
     public function render()
     {
         return view('livewire.customer.customer-dashboard-component')->layout('layouts.base');

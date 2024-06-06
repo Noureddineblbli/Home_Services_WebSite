@@ -9,8 +9,8 @@
             <p><strong>Heure de réservation:</strong> {{ $reservationInfo['time'] }}</p>
             <p><strong>Date de création:</strong> {{ $reservationInfo['created_at'] }}</p>
             <p><strong>Status:</strong> {{ $reservationInfo['status'] }}</p>
-            <p><strong>Ville:</strong> {{ $reservationInfo['ville'] }}</p>
-            <p><strong>L'addresse:</strong> {{ $reservationInfo['adresse_maison'] }}</p>
+            <p><strong>Ville:</strong> {{ $reservationInfo['city'] }}</p>
+            <p><strong>L'addresse:</strong> {{ $reservationInfo['address'] }}</p>
         </div>
     @endif
 

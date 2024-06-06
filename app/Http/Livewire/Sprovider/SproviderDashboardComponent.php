@@ -68,7 +68,7 @@ class SproviderDashboardComponent extends Component
             }    
     }
 
-    public function verifyReservation($reservationId)
+    public function AcceptReservation($reservationId)
     {
         $reservation = Reservation::find($reservationId);
         $reservation->status = 'confirmé';
@@ -95,27 +95,37 @@ class SproviderDashboardComponent extends Component
         ->join('services as s', 's.id', '=', 'r.service_id')
         ->where('r.id', $reservationId)
         ->first();
-    $reservationDetails = $this->reservationDetails;
-    $reservationDetails->reservation_created_date = Carbon::parse($reservationDetails->reservation_created_at)->format('Y-m-d');
-    $reservationDetails->reservation_created_time = Carbon::parse($reservationDetails->reservation_created_at)->format('H:i');
+        $reservationDetails = $this->reservationDetails;
+        $reservationDetails->reservation_created_date = Carbon::parse($reservationDetails->reservation_created_at)->format('Y-m-d');
+        $reservationDetails->reservation_created_time = Carbon::parse($reservationDetails->reservation_created_at)->format('H:i');
 
-    Mail::to($reservationDetails->client_email)->send(new ReservationAccepted(
-        $reservationDetails->client_name,
-        $reservationDetails->provider_name,
-        $reservationDetails->provider_email,
-        $reservationDetails->phone,
-        $reservationDetails->address,
-        $reservationDetails->time,
-        $reservationDetails->date,
-        $reservationDetails->reservation_created_date,
-        $reservationDetails->reservation_created_time,
-        $reservationDetails->serviceName));
+        Mail::to($reservationDetails->client_email)->send(new ReservationAccepted(
+            $reservationDetails->client_name,
+            $reservationDetails->provider_name,
+            $reservationDetails->provider_email,
+            $reservationDetails->phone,
+            $reservationDetails->address,
+            $reservationDetails->time,
+            $reservationDetails->date,
+            $reservationDetails->reservation_created_date,
+            $reservationDetails->reservation_created_time,
+            $reservationDetails->serviceName));
+            $this->dispatchBrowserEvent('swal:response', [
+                'title' => 'Acceptée!',
+                'text' => 'La réservation a été acceptée.',
+                'icon' => 'success',
+            ]);
 
     }
-    public function rejeter($reservationId, $prestataireId)
+    public function RefuseReservation($reservationId, $prestataireId)
     {
         $prestataire = ServiceProvider::find($prestataireId);
         $prestataire->reservationsRejetees()->attach($reservationId);
+        $this->dispatchBrowserEvent('swal:response', [
+            'title' => 'Refusée!',
+            'text' => 'La réservation a été refusée.',
+            'icon' => 'success',
+        ]);
         $this->initialize($this->userId);
         
     }

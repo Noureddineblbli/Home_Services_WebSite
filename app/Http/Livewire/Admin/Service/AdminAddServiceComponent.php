@@ -18,13 +18,9 @@ class AdminAddServiceComponent extends Component
     public $tagline;
     public $service_category_id;
     public $price;
-    public $discount;
-    public $discount_type;
     public $image;
     public $thumbnail;
     public $description;
-    public $inclusion;
-    public $exclusion;
 
     public function generateSlug()
     {
@@ -38,12 +34,10 @@ class AdminAddServiceComponent extends Component
             'slug' => 'required',
             'tagline' => 'required',
             'service_category_id' => 'required',
-            'price' => 'required',
+            'price' => ['required','numeric',],
             'image' => 'required|mimes:png,jpg,jpeg',
             'thumbnail' => 'required|mimes:png,jpg,jpeg',
             'description' => 'required',
-            'inclusion' => 'required',
-            'exclusion' => 'required'
         ]);
     }
 
@@ -54,36 +48,39 @@ class AdminAddServiceComponent extends Component
             'slug' => 'required',
             'tagline' => 'required',
             'service_category_id' => 'required',
-            'price' => 'required',
+            'price' => ['required','numeric',],
             'image' => 'required|mimes:png,jpg,jpeg',
             'thumbnail' => 'required|mimes:png,jpg,jpeg',
             'description' => 'required',
-            'inclusion' => 'required',
-            'exclusion' => 'required'
         ]);
 
-        $service = new Service();
-        $service->name = $this->name;
-        $service->slug = $this->slug;
-        $service->tagline = $this->tagline;
-        $service->service_category_id = $this->service_category_id;
-        $service->price = $this->price;
-        $service->discount = $this->discount;
-        $service->discount_type = $this->discount_type;
-        $service->description = $this->description;
-        $service->exclusion = str_replace("\n", '|', trim($this->exclusion));
-        $service->inclusion = str_replace("\n", '|', trim($this->inclusion));
+        if(Service::where('slug',$this->slug)->first()){
+            $this->dispatchBrowserEvent('swal:response', [
+                'title' => '!!!!!',
+                'text' => 'Ce service existe déjà!',
+                'icon' => 'warning'
+            ]);
+        }else{
+            $service = new Service();
+            $service->name = $this->name;
+            $service->slug = $this->slug;
+            $service->tagline = $this->tagline;
+            $service->service_category_id = $this->service_category_id;
+            $service->price = $this->price;
+            $service->description = $this->description;
 
-        $imageName = Carbon::now()->timestamp . '.' . $this->thumbnail->extension();
-        $this->thumbnail->storeAs('services/thumbnails', $imageName);
-        $service->thumbnail = $imageName;
+            $imageName = Carbon::now()->timestamp . '.' . $this->thumbnail->extension();
+            $this->thumbnail->storeAs('services/thumbnails', $imageName);
+            $service->thumbnail = $imageName;
 
-        $imageName2 = Carbon::now()->timestamp . '.' . $this->image->extension();
-        $this->image->storeAs('services', $imageName2);
-        $service->image = $imageName2;
+            $imageName2 = Carbon::now()->timestamp . '.' . $this->image->extension();
+            $this->image->storeAs('services', $imageName2);
+            $service->image = $imageName2;
 
-        $service->save();
-        session()->flash('message', 'Service has been created successfully!');
+            $service->save();
+            session()->flash('message', 'Le service a été ajouté avec succès !');
+        }
+
     }
 
     public function render()

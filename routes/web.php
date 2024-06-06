@@ -34,6 +34,8 @@ use App\Http\Livewire\Admin\Service\AdminEditServiceCategoryComponent;
 use App\Http\Livewire\Admin\Service\AdminVerifyServiceProvidersComponent;
 use App\Http\Livewire\Admin\Service\AdminPendingServiceProvidersComponent;
 use App\Http\Livewire\Admin\Service\AdminServiceProvidersDetailsComponent;
+use App\Http\Livewire\Customer\ReservationSproviderDetailsComponent;
+use App\Http\Livewire\Sprovider\SproviderReviewsDetailsComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,11 +118,14 @@ Route::middleware(['verified', 'auth:sanctum', config('jetstream.auth_session'),
 
     Route::get('/sprovider/profile', SproviderProfileComponent::class)->name('sprovider.profile');
     Route::get('/sprovider/profile/edit', EditSproviderProfileComponent::class)->name('sprovider.edit_profile');
+    Route::get('/sprovider/{id}/reviews', SproviderReviewsDetailsComponent::class)->name('sprovider.reviews');
+
 });
 
 // For Customer
 Route::middleware(['verified' ,'auth:sanctum', config('jetstream.auth_session')])->group(function () {
     Route::get('/customer/dashboard', CustomerDashboardComponent::class)->name('customer.dashboard');
+    Route::get('/customer/dashboard/SproviderDétails/{SproviderId}', ReservationSproviderDetailsComponent::class)->name('customer.dashboard.SproviderDétails');
 });
 
 Route::get('/email/verify', function () {

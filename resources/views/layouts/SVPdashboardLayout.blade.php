@@ -50,7 +50,7 @@
                 <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none">
                     @csrf
                 </form>
-                <span class="material-icons-outlined">exit_to_app</span> Logout
+                <span class="material-icons-outlined">exit_to_app</span> Se déconnecter
             </a>
           </li>
         </ul>

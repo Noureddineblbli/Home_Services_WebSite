@@ -16,7 +16,7 @@
             max-width: 600px;
             margin: 20px auto;
             padding: 20px;
-            background-color: #ED9455;
+            background-color: #FFEC9E;
             border-radius: 10px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
@@ -30,7 +30,7 @@
         .button {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #FFEC9E;
+            background-color: #ED9455;
             text-decoration: none;
             border-radius: 5px;
             transition: background-color 0.3s ease;
@@ -38,11 +38,12 @@
         .button:hover {
             background-color: #FFBB70;
         }
+        
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Confirmation de Rendez-vous</h1>
+        <h1>Annonce de réservation</h1>
         
         <p>Bonjour {{$serviceProvider->name}},</p>
         
@@ -62,9 +63,8 @@
         <p>Merci pour votre réponse rapide.</p>
         
         <p>Cordialement,</p>
+        <p>L'équipe de ServiceNet</p>
     </div>
-    <div class="footer">
-        <p>© 2024 ServiceNet. Tous droits réservés.</p>
-    </div>
+    
 </body>
 </html>

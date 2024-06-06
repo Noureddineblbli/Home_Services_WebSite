@@ -35,7 +35,11 @@ class AdminContactAnswerComponent extends Component
         Mail::to($this->contactInfo['email'])->send(new ContactReplyEmail($validatedData['subject'], $validatedData['message'],$this->contactInfo['name']));
 
 
-        session()->flash('message', 'Votre réponse a été envoyée avec succès.');
+        $this->dispatchBrowserEvent('swal:response', [
+            'title' => 'Envoyé!',
+            'text' => 'la réponse a été envoyé avec succés!',
+            'icon' => 'success',
+        ]);
 
         //return redirect()->route('admin.contact.answer', ['id' => $this->contactInfo['id']]);
     }

@@ -5,7 +5,6 @@
         <div class="opacy_bg_02">
             <div class="container">
                 <h1>Connexion</h1>
-                <x-jet-validation-errors class="mb-4" />
                 <div class="crumbs">
                     <ul>
                         <li><a href="/">Accueil</a></li>
@@ -26,6 +25,7 @@
                         <div class="col-xs-12 col-sm-6 col-md-6 profile1" style="min-height: 300px;">
                             <div class="thinborder-ontop">
                                 <h3>Informations de connexion</h3>
+                                <x-jet-validation-errors class="mb-4" style="color:red;" />
                                 <form id="userloginform" method="POST" action="{{ route('login') }}">
                                     @csrf
                                     <div class="form-group row">

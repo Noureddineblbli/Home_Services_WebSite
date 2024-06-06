@@ -1,15 +1,15 @@
 <div>
 
-                <h1>Add Slide</h1>
+                <h1>Ajouter une diapositive</h1>
 
                             <div class="panel panel-default" style="font-weight: 600;">
                                 <div class="panel-heading">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            Add New Slide
+                                            Ajouter une nouvelle diapositive
                                         </div>
                                         <div class="col-md-6">
-                                            <a href="{{ route('admin.slider') }}" class="btn btn-info pull-right">All Slides</a>
+                                            <a href="{{ route('admin.slider') }}" class="btn btn-info pull-right">Toutes les diapositives</a>
                                         </div>
                                     </div>
                                 </div>
@@ -20,7 +20,7 @@
                                     <form class="form-horizontal" wire:submit.prevent="addNewSlide">
                                         @csrf
                                         <div class="form-group">
-                                            <label for="title" class="control-label col-sm-2">Title: </label>
+                                            <label for="title" class="control-label col-sm-2">Titre: </label>
                                             <div class="col-sm-7">
                                                 <input type="text" class="form-control" name="title" wire:model="title"/>
                                                 @error('title')
@@ -55,7 +55,7 @@
                                         <div class="form-group">
                                             <label for="" class="control-label col-sm-3"></label>
                                             <div class="col-sm-9">
-                                                <button type="submit" class="btn btn-success pull-right">Add Slide</button>
+                                                <button type="submit" class="btn btn-success pull-right">Ajouter une diapositive</button>
                                             </div>
                                         </div>
                                     </form>
